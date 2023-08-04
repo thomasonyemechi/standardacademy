@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\WebviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [WebviewController::class, 'guestIndex'] );
+Route::get('/about', [WebviewController::class, 'aboutIndex'] );
 
 
 
@@ -49,6 +53,16 @@ Route::group([], function (){
 
         Route::get('/guardian-record', [ParentController::class, 'parentIndex']);
         Route::post('/add-guardian', [ParentController::class, 'createGuardianProfile']);
+
+        Route::get('/add-student', [StudentController::class, 'addStudentIndex']);
+        Route::get('/students', [StudentController::class, 'allStudent']);
+        Route::get('/student/{student_id}', [StudentController::class, 'studentProfileIndex']);
+        Route::post('/create-student-profile', [StudentController::class, 'createStudentProfile']);
+        Route::post('/update-student-class', [StudentController::class, 'updateStudentClass']);
+        Route::post('/update-student-profile', [StudentController::class, 'updateStudentProfile']);
+
+        
+
         
 
     });

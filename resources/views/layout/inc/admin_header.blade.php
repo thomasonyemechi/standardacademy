@@ -7,7 +7,8 @@
                         @yield('page_title')
                     </div>
                 </div>
-                <ul class="navbar-nav header-right">     
+                <ul class="navbar-nav header-right">   
+                      
                     <li class="nav-item">
                         <div class="dropdown header-profile2">
                             <a class="nav-link ms-0" href="javascript:void(0);" role="button"

@@ -20,11 +20,10 @@
     <div class="authincation d-flex flex-column flex-lg-row flex-column-fluid">
         <div class="login-aside text-center  d-flex flex-column flex-row-auto">
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
-                <div class="text-center mb-lg-4 mb-2 pt-5 logo">
-                    <img src="assets/images/logo-white.png" alt="">
+                <div class=" text-center mb-lg-4 mb-2 pt-5 logo">
+                    <img class="rounded" src="assets/images/logo.jpg" alt="">
+                    <h2 class="text-white">STANDARD ACADEMY</h2>
                 </div>
-                <h3 class="mb-2 text-white">Welcome back!</h3>
-                <p class="mb-4">Enter your details to manage students <br>and other school information</p>
             </div>
             <div class="aside-image position-relative"
                 style="background-image:url(assets/images/background/pic-2.png);">

@@ -23,9 +23,12 @@ return new class extends Migration
             $table->string('sex')->nullable();
             $table->string('username')->nullable();
             $table->string('password');
+            $table->string('photo');
+            $table->string('dob')->nullable();
             $table->integer('pwd');
             $table->text('others')->nullable();
             $table->integer('status')->default(1);
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

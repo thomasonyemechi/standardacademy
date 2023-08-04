@@ -1,24 +1,27 @@
 <div class="dlabnav">
-    <div class="dlabnav-scroll">
+    <div class="dlabnav-scroll">	
         <ul class="metismenu" id="menu">
             <li><a class="" href="/admin/dashboard" aria-expanded="false">
+                <i class="material-symbols-outlined">home</i>
                     <span class="nav-text">Dashboard</span>
                 </a>
 
             </li>
             <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                <i class="material-symbols-outlined">school</i>
                     <span class="nav-text">Student</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="/admin/guardian-record">Add Guardian</a></li>
-                    <li><a href="#">Add New Student</a></li>
-                    <li><a href="">Student List</a></li>
+                    <li><a href="/admin/add-student">Add New Student</a></li>
+                    <li><a href="/admin/students">Student List</a></li>
                 </ul>
 
             </li>
 
             <li>
                 <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="material-icons">article</i>
                     <span class="nav-text">Class & Subject</span>
                 </a>
                 <ul aria-expanded="false">
@@ -29,6 +32,7 @@
 
             <li>
                 <a class="" href="/admin/term-setup" aria-expanded="false">
+                    <i class="material-icons">article</i>
                 <span class="nav-text">Session and Term</span>
             </a>
 
