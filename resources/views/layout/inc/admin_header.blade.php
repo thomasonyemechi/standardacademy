@@ -17,7 +17,7 @@
                                     <div class="d-flex align-items-center sidebar-info">
 
                                     </div>
-                                    <img src="assets/images/user.jpg" alt="">
+                                    <img src="{{asset('assets/images/user.jpg') }}" alt="">
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end pb-0" style="">
@@ -25,7 +25,7 @@
                                     <div class="card-header p-3">
                                         <ul class="d-flex align-items-center">
                                             <li>
-                                                <img src="assets/images/user.jpg" class="ms-0" alt="">
+                                                <img src="{{asset('assets/images/user.jpg') }}" class="ms-0" alt="">
                                             </li>
                                             <li class="ms-2">
                                                 <h4 class="mb-0">Nella Vita</h4>

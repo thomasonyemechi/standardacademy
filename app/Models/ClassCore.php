@@ -14,4 +14,11 @@ class ClassCore extends Model
     {
         return $this->belongsTo(ClassCategory::class);
     }
+
+    function students()
+    {
+        return $this->hasMany(Student::class, 'class_id');
+    }
+
+    
 }

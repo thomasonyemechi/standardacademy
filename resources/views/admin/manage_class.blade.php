@@ -23,6 +23,7 @@
                                         <tr>
                                             <th>Class</th>
                                             <th>Students</th>
+                                            <th>Class Teacher</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -31,7 +32,8 @@
                                         @foreach ($classes as $class)
                                             <tr>
                                                 <td>{{ $class->class }}</td>
-                                                <td>0</td>
+                                                <td>{{ $class->students_count }}</td>
+                                                <td></td>
                                                 <td>
                                                     <form action="/admin/order-class" method="post" >@csrf
                                                         <div class="align-items-center">
@@ -44,7 +46,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="float-right">
-                                                        <a href="#"> class-profile <i
+                                                        <a href="/admin/class-profile/{{$class->id}}"> class-profile <i
                                                                 class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                                                         </a>
                                                     </div>

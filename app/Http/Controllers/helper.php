@@ -13,3 +13,8 @@ function term_text($term)
     }
     return $val;
 }
+
+function money_format($num)
+{
+    return '$ '.number_format($num);
+}

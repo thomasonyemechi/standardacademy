@@ -23,7 +23,6 @@
                             </div>
                         </form>
                         <div>
-
                             <a href="/admin/add-student" class="btn btn-primary">
                                 + New Student
                             </a>
@@ -32,10 +31,6 @@
                 </div>
 
 
-
-
-
-                <!--column-->
                 <div class="col-xl-12 wow fadeInUp" data-wow-delay="1.5s">
                     <div class="table-responsive full-data">
                         <table class="table-responsive-lg table display dataTablesCard student-tab dataTable no-footer"
@@ -59,9 +54,9 @@
                                     $bg = ['bg-secondary', 'bg-warning', 'bg-success', 'bg-primary', 'bg-danger'];
                                 @endphp
                                 @foreach ($students as $student)
-                                @php
-                                    $bg_c = $bg[ rand(0, (count($bg)-1)) ];
-                                @endphp
+                                    @php
+                                        $bg_c = $bg[rand(0, count($bg) - 1)];
+                                    @endphp
                                     <tr>
                                         <td>
                                             <div class="checkbox me-0 align-self-center">
@@ -74,23 +69,26 @@
                                         </td>
                                         <td>
                                             <div class="trans-list">
-                                                <img src="{{ asset($student->photo) }}" alt="" class="avatar avatar-sm me-3">
-                                                <h4>{{ $student->surname.' '.$student->firstname.' '.$student->othername }}</h4>
+                                                <img src="{{ asset($student->photo) }}" alt=""
+                                                    class="avatar avatar-sm me-3">
+                                                <h4>{{ $student->surname . ' ' . $student->firstname . ' ' . $student->othername }}
+                                                </h4>
                                             </div>
                                         </td>
-                                        <td><span class="text-primary font-w600">ID {{ $student->registration_number  }}</span></td>
+                                        <td><span class="text-primary font-w600">ID
+                                                {{ $student->registration_number }}</span></td>
                                         <td>
-                                            <div class="date">{{ date('F j, Y', strtotime($student->created_at)) }}</div>
+                                            <div class="date">{{ date('F j, Y', strtotime($student->dob)) }}</div>
                                         </td>
                                         <td>
-                                            <h6 class="mb-0"> {{$student->parent->guardian_name}} </h6>
+                                            <h6 class="mb-0"> {{ $student->parent->guardian_name }} </h6>
                                         </td>
                                         <td>
-                                            <h6 class="mb-0">{{$student->parent->state}} </h6>
+                                            <h6 class="mb-0">{{ $student->parent->state }} </h6>
                                         </td>
                                         <td>
-                                            <div class="badge {{$bg_c}} ">
-                                                {{$student->grade->class}}
+                                            <div class="badge {{ $bg_c }} ">
+                                                {{ $student->grade->class }}
                                             </div>
                                         </td>
                                         <td>
@@ -104,7 +102,8 @@
                                                     </svg>
                                                 </div>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="/admin/student/{{$student->id}}">View Profile</a>
+                                                    <a class="dropdown-item" href="/admin/student/{{ $student->id }}">View
+                                                        Profile</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -114,12 +113,12 @@
                         </table>
                     </div>
                 </div>
+                <div class="d-flex justify-content-end ">
+                    {{ $students->links('pagination::bootstrap-4') }}
+                </div>
             </div>
         </div>
     </div>
-    </div>
 @endsection
-
-
 @push('scripts')
 @endpush

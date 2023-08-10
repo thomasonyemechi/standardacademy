@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StaffController;
@@ -21,20 +22,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WebviewController::class, 'guestIndex'] );
-Route::get('/about', [WebviewController::class, 'aboutIndex'] );
-Route::get('/contact', [WebviewController::class, 'contactIndex'] );
-Route::get('/admission', [WebviewController::class, 'admissionIndex'] );
-Route::get('/school-fees', [WebviewController::class, 'feesIndex'] );
+Route::get('/', [WebviewController::class, 'guestIndex']);
+Route::get('/about', [WebviewController::class, 'aboutIndex']);
+Route::get('/contact', [WebviewController::class, 'contactIndex']);
+Route::get('/admission', [WebviewController::class, 'admissionIndex']);
+Route::get('/school-fees', [WebviewController::class, 'feesIndex']);
 
 
 
-Route::group([], function (){
+Route::group([], function () {
 
     Route::view('/login', 'admin.login')->name('login');
     Route::post('/staff_login', [AuthController::class, 'staffLogin']);
 
-    Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => [] ], function (){
+    Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => []], function () {
         Route::get('/term-setup', [SessionController::class, 'termIndex']);
         Route::post('/create-session', [SessionController::class, 'createSession']);
         Route::post('/update-term', [SessionController::class, 'updateTermInfo']);
@@ -50,6 +51,7 @@ Route::group([], function (){
         Route::get('/manage-class', [ClassController::class, 'classIndex']);
         Route::post('/create-class', [ClassController::class, 'createClass']);
         Route::post('/order-class', [ClassController::class, 'orderClass']);
+        Route::get('/class-profile/{class_id}', [ClassController::class, 'classProfileIndex']);
 
         Route::get('/manage-subject', [SubjectController::class, 'subjectIndex']);
         Route::post('/create-subject', [SubjectController::class, 'createSubject']);
@@ -69,8 +71,13 @@ Route::group([], function (){
         Route::post('/create-staff-profile', [StaffController::class, 'createStaffProfile']);
         Route::get('/staffs', [StaffController::class, 'staffListIndex']);
         Route::get('/staff/{staff_id}', [StaffController::class, 'staffProfileIndex']);
-        
 
+
+        Route::get('/manage-levy/{fe_id?}/{class_id?}', [FeeController::class, 'manageFeeIndex']);
+        Route::post('/create-fee', [FeeController::class, 'crerateFeeCategory']);
+        Route::post('/update-fee', [FeeController::class, 'updateFeeCategory']);
+        Route::post('/set-fee', [FeeController::class, 'setFees']);
+        Route::post('/view-fee', [FeeController::class, 'viewFee']);
+        Route::get('/fetch_fee/{fee}/{class}', [FeeController::class, 'fetSettedFee']);
     });
-
 });

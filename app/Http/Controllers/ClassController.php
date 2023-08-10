@@ -5,17 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\ClassArm;
 use App\Models\ClassCategory;
 use App\Models\ClassCore;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ClassController extends Controller
 {
 
+    function classProfileIndex($class_id)
+    {
+        $grade = ClassCore::with(['students'])->findOrFail($class_id);
+
+
+
+        $term_id = $this->currentTerm()->id;
+        $fees = Payment::where(['class_id' => $class_id, 'type' => 1, 'term_id' => $term_id ])->sum('total');
+        $payments = Payment::where(['class_id' => $class_id, 'type' => 5, 'term_id' => $term_id ])->sum('total');
+
+        return view('admin.class-profile', compact(['grade', 'payments', 'fees']));
+    }
+
 
     function classIndex()
     {
         $categories = ClassCategory::orderby('category','asc')->get();
-        $classes = ClassCore::with(['category:id,category'])->orderby('index','asc')->get();
+        $classes = ClassCore::with(['category:id,category'])->withCount('students')->orderby('index','asc')->get();
         return view('admin.manage_class', compact(['categories', 'classes']));
     }
 

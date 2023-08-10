@@ -42,6 +42,14 @@
                 </ul>
             </li>
 
+            <li><a class="" href="/admin/manage-levy" aria-expanded="false">
+                <i class="material-symbols-outlined">home</i>
+                    <span class="nav-text">Manage Fees</span>
+                </a>
+
+            </li>
+
+
             <li>
                 <a class="" href="/admin/term-setup" aria-expanded="false">
                     <i class="material-icons">article</i>
