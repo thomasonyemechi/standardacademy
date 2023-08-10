@@ -15,4 +15,19 @@ class WebviewController extends Controller
     {
         return view('about');
     }
+
+    function contactIndex()
+    {
+        return view('contact');
+    }
+
+    function admissionIndex()
+    {
+        return view('admission');
+    }
+
+    function feesIndex()
+    {
+        return view('fees');
+    }
 }

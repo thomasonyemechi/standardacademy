@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\WebviewController;
@@ -22,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebviewController::class, 'guestIndex'] );
 Route::get('/about', [WebviewController::class, 'aboutIndex'] );
+Route::get('/contact', [WebviewController::class, 'contactIndex'] );
+Route::get('/admission', [WebviewController::class, 'admissionIndex'] );
+Route::get('/school-fees', [WebviewController::class, 'feesIndex'] );
 
 
 
@@ -30,7 +34,7 @@ Route::group([], function (){
     Route::view('/login', 'admin.login')->name('login');
     Route::post('/staff_login', [AuthController::class, 'staffLogin']);
 
-    Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth'] ], function (){
+    Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => [] ], function (){
         Route::get('/term-setup', [SessionController::class, 'termIndex']);
         Route::post('/create-session', [SessionController::class, 'createSession']);
         Route::post('/update-term', [SessionController::class, 'updateTermInfo']);
@@ -61,8 +65,10 @@ Route::group([], function (){
         Route::post('/update-student-class', [StudentController::class, 'updateStudentClass']);
         Route::post('/update-student-profile', [StudentController::class, 'updateStudentProfile']);
 
-        
-
+        Route::get('/add-staff', [StaffController::class, 'addStaffIndex']);
+        Route::post('/create-staff-profile', [StaffController::class, 'createStaffProfile']);
+        Route::get('/staffs', [StaffController::class, 'staffListIndex']);
+        Route::get('/staff/{staff_id}', [StaffController::class, 'staffProfileIndex']);
         
 
     });

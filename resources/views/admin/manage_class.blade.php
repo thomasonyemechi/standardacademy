@@ -22,7 +22,6 @@
                                     <thead>
                                         <tr>
                                             <th>Class</th>
-                                            <th>Category</th>
                                             <th>Students</th>
                                             <th></th>
                                             <th></th>
@@ -32,7 +31,6 @@
                                         @foreach ($classes as $class)
                                             <tr>
                                                 <td>{{ $class->class }}</td>
-                                                <td>{{ $class->category->category }}</td>
                                                 <td>0</td>
                                                 <td>
                                                     <form action="/admin/order-class" method="post" >@csrf

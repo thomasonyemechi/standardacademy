@@ -7,6 +7,7 @@
                 </a>
 
             </li>
+
             <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                 <i class="material-symbols-outlined">school</i>
                     <span class="nav-text">Student</span>
@@ -18,6 +19,17 @@
                 </ul>
 
             </li>
+            <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                <i class="material-symbols-outlined">person</i>
+                    <span class="nav-text">Teachers/Staffs</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="/admin/add-staff">Create Staff Profile</a></li>
+                    <li><a href="/admin/staffs">Staff List</a></li>
+                </ul>
+
+            </li>
+
 
             <li>
                 <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">

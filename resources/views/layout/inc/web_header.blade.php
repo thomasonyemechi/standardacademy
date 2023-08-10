@@ -74,14 +74,26 @@
         <div class="mainmenu-area">
             <div class="auto-container">
                 <div class="row">
-                    <div class="col-lg-9 d-lg-block">
+                    <div class="col-lg-12 d-lg-block">
                         <nav class="navbar navbar-expand-lg justify-content-left">
                             <ul class="navbar-nav">
-                                <li class="active"><a class="nav-link" href="/">Home</a>
+                                <li><a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li><a class="nav-link" href="/about">About Us</a></li>
-                                <li><a class="nav-link" href="#">Photo Gallery</a> </li>
-                                <li><a class="nav-link" href="#">New and Event</a>  </li>
+                                {{-- <li><a class="nav-link" href="#">Term Dates</a></li> --}}
+                                <li class="dropdown"><a class="nav-link" href="javascript:;">Admission & Fee</a>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="/admission">How To Apply</a></li>
+                                       <li><a href="/school-fees">Fees</a></li>
+                                    </ul>    
+                                 </li>
+                                 <li class="dropdown"><a class="nav-link" href="javascript:;">Media & Resources</a>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="#">Gallery </a></li>
+                                       <li><a href="#">Parent Login </a></li>
+                                    </ul>    
+                                 </li>
+                                <li><a class="nav-link" href="#">News</a>  </li>
                                 <li><a href="/contact" class="nav-link">Contact</a></li>
                             </ul>
                         </nav>
