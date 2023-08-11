@@ -33,7 +33,7 @@
                                     </div>
                                 </form>
                                 <div>
-                                    <a href="/admin/add-saff" class="btn btn-primary">
+                                    <a href="/admin/add-staff" class="btn btn-primary">
                                         + New Staff
                                     </a>
                                 </div>

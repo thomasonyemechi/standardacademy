@@ -37,7 +37,7 @@
                                 Subject List
                             </h3>
                         </div>
-                        <div class="card-body p-1">
+                        <div class="card-body p-0 wow p-1 fadeInUp" data-wow-delay="1.5s">
                             <div class="table-responsive">
                                 <table id="example1" class="table mb-0 table-bordered table-hover table-striped">
                                     <thead>

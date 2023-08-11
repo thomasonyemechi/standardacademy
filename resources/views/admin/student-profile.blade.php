@@ -58,8 +58,8 @@
                                     <div class="dropdown-menu dropdown-menu-end" style="">
                                         <a class="dropdown-item openProfileEditModal " href="javascript:;">Edit Profile
                                             Info</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Make Fee Payment</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Edit Basic Info</a>
+                                        <a class="dropdown-item openfeePaymentModal" href="javascript:void(0);">Make Fee
+                                            Payment</a>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                     <ul class="student-details">
                                         <li class="me-2">
                                             <a class="icon-box bg-secondary">
-                                                <i class="la la-clock text-white" ></i>
+                                                <i class="la la-clock text-white"></i>
                                             </a>
                                         </li>
                                         <li>
@@ -82,7 +82,7 @@
                                     <ul class="student-details">
                                         <li class="me-2">
                                             <a class="icon-box bg-secondary">
-                                                <i class="la la-calendar text-white" ></i>
+                                                <i class="la la-calendar text-white"></i>
                                             </a>
 
                                         </li>
@@ -101,7 +101,7 @@
                     <div class="card h-auto">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <div class="" >
+                                <div class="">
                                     <h5>Guardian Details</h5>
                                 </div>
                                 <div class="dropdown custom-dropdown">
@@ -114,7 +114,8 @@
                                         </svg>
                                     </div>
                                     <div class="dropdown-menu dropdown-menu-end" style="">
-                                        <a class="dropdown-item openProfileEditModal " href="javascript:;">View Guardian Profile</a>
+                                        <a class="dropdown-item openProfileEditModal " href="javascript:;">View Guardian
+                                            Profile</a>
                                     </div>
                                 </div>
                             </div>
@@ -192,11 +193,11 @@
                                 </li>
                             </ul>
                         </div>
+
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="DefaultTab" role="tabpanel"
                                 aria-labelledby="home-tab">
                                 <div class="card-body pt-0">
-                                    <!-- Nav tabs -->
                                     <div class="default-tab">
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li class="nav-item">
@@ -224,31 +225,39 @@
                                                                     <th>Discount</th>
                                                                     <th>Total</th>
                                                                 </tr>
-
-
-
                                                                 <tr>
-                                                                    <th></th>
-                                                                    <th>₦ 0</th>
-                                                                    <th>₦ 0</th>
-                                                                    <th>₦ 0</th>
+                                                                    @php
+                                                                        $tot = 0;
+                                                                    @endphp
+                                                                    @foreach ($fees as $fe)
+                                                                        @php
+                                                                            $tot += $fe->total;
+                                                                        @endphp
+                                                                        <th>{{ $fe->fee_cat->fee }}</th>
+                                                                        <th>{{ money_format($fe->amount) }}</th>
+                                                                        <th>{{ money_format($fe->discount) }}</th>
+                                                                        <th>{{ money_format(abs($fe->total)) }}</th>
+                                                                    @endforeach
                                                                 </tr>
+                                                                @if ($brought_forward[0] > 0)
+                                                                    <tr>
+                                                                        <th colspan="3">Balance Brought Foward</th>
+                                                                        <td> {{ money_format($brought_forward[0]) }} </td>
+                                                                    </tr>
+                                                                @endif
 
                                                                 <tr>
-                                                                    <th colspan="3">Balance Brought Foward</th>
-                                                                    <td>₦ 0</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="3">Total Owing</th>
-                                                                    <th>₦ 0</th>
+                                                                    <th colspan="3">Total Fee</th>
+                                                                    <th>{{ money_format(abs($tot)) }}</th>
                                                                 </tr>
                                                                 <tr>
                                                                     <th colspan="3">Amount Paid</th>
-                                                                    <th>₦ 0</th>
+                                                                    <th>{{ money_format($brought_forward[1]) }}</th>
                                                                 </tr>
                                                                 <tr>
                                                                     <th colspan="3">Expected Payments</th>
-                                                                    <th>₦ 0</th>
+                                                                    <th>{{ money_format(abs($tot) - $brought_forward[1]) }}
+                                                                    </th>
                                                                 </tr>
 
 
@@ -304,52 +313,36 @@
                                         style="min-width: 845px" aria-describedby="example-payment_info">
                                         <thead>
                                             <tr>
-                                                <th class="sorting sorting_asc" tabindex="0"
-                                                    aria-controls="example-payment" rowspan="1" colspan="1"
-                                                    aria-sort="ascending"
-                                                    aria-label="Payment Number: activate to sort column descending"
-                                                    style="width: 287.383px;">Payment Number</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example-payment"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Date &amp;amp; Time: activate to sort column ascending"
-                                                    style="width: 296.816px;">Date &amp; Time</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example-payment"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Amount: activate to sort column ascending"
-                                                    style="width: 135.391px;">Amount</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example-payment"
-                                                    rowspan="1" colspan="1"
-                                                    aria-label="Status: activate to sort column ascending"
-                                                    style="width: 133.066px;">Status</th>
+                                                <th>#</th>
+                                                <th>Date &amp; Time</th>
+                                                <th>Amount</th>
+                                                <th>By</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="selected odd">
-                                                <td class="sorting_1">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="icon-box icon-box-sm bg-danger">
-                                                            <svg width="26" height="16" viewBox="0 0 26 16"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M25.0004 1.33333C25.013 1.24043 25.013 1.14624 25.0004 1.05333C24.9888 0.975052 24.9664 0.898765 24.9337 0.826666C24.8985 0.761503 24.8584 0.699103 24.8137 0.64C24.763 0.555671 24.7001 0.479292 24.6271 0.413333L24.4671 0.32C24.3901 0.262609 24.3046 0.21762 24.2137 0.186666H23.9471C23.8658 0.107993 23.7709 0.0447434 23.6671 0H17.0004C16.6468 0 16.3076 0.140476 16.0576 0.390525C15.8075 0.640573 15.6671 0.979711 15.6671 1.33333C15.6671 1.68696 15.8075 2.02609 16.0576 2.27614C16.3076 2.52619 16.6468 2.66667 17.0004 2.66667H20.7737L15.4404 8.94667L9.68039 5.52C9.40757 5.35773 9.0858 5.29813 8.77296 5.3519C8.46011 5.40567 8.17671 5.56929 7.97373 5.81333L1.30706 13.8133C1.19479 13.9481 1.1102 14.1036 1.05815 14.2711C1.00609 14.4386 0.987577 14.6147 1.00368 14.7893C1.01978 14.9639 1.07017 15.1337 1.15198 15.2888C1.23378 15.4439 1.34538 15.5814 1.48039 15.6933C1.72028 15.8921 2.02219 16.0006 2.33373 16C2.52961 16.0003 2.72315 15.9575 2.9006 15.8745C3.07804 15.7915 3.23503 15.6705 3.36039 15.52L9.29373 8.4L14.9871 11.8133C15.2571 11.9735 15.575 12.0332 15.8848 11.982C16.1945 11.9308 16.4763 11.7719 16.6804 11.5333L22.3337 4.93333V8C22.3337 8.35362 22.4742 8.69276 22.7242 8.94281C22.9743 9.19286 23.3134 9.33333 23.6671 9.33333C24.0207 9.33333 24.3598 9.19286 24.6099 8.94281C24.8599 8.69276 25.0004 8.35362 25.0004 8V1.33333Z"
-                                                                    fill="#FCFCFC"></path>
-                                                            </svg>
+                                            @foreach ($payments as $pay)
+                                                <tr class="selected odd">
+                                                    <td class="sorting_1">
+
+                                                        <div>
+                                                            <h6 class="mb-0 font-w600">#{{$pay->id}}</h6>
                                                         </div>
-                                                        <div class="ms-3">
-                                                            <h6 class="mb-0 font-w600">#1234567810</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span>3 March 2023, 13:45 PM</span>
-                                                </td>
-                                                <td>
-                                                    <span class="doller font-w600"> $ 50,036</span>
-                                                </td>
-                                                <td class="pe-3">
-                                                    <span class="text-danger font-w600">Canceled</span>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td>
+                                                        <span> {{date('j M, Y H:i:s ',strtotime($pay->created_at))}} </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="doller font-w600">{{ money_format($pay->total) }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span> {{$pay->user->name}} </span>
+                                                    </td>
+                                                    <td class="pe-3">
+                                                        <span class="text-success font-w600">Completed</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -504,7 +497,8 @@
                                                     class="required">*</span></label>
                                             <div class="d-flex">
                                                 <input type="date" name="dob" class="form-control"
-                                                    placeholder="2017-06-04" id="datepicker" value="{{ $student->dob }}" >
+                                                    placeholder="2017-06-04" id="datepicker"
+                                                    value="{{ $student->dob }}">
                                                 <select name="gender" class="form-control w-50 ms-3" id="">
                                                     <option {{ $student->sex == 'Male' ? 'selected' : '' }}>Male</option>
                                                     <option {{ $student->sex == 'Female' ? 'selected' : '' }}>Female
@@ -562,6 +556,44 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="feePaymentModal">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Make Fee Payment </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/admin/make-payment" class="row">@csrf
+                        <div class="col-md-6 form-group">
+                            <label>Fee Category</label>
+
+                            <select name="fee_cat" class="form-control">
+                                <option disabled selected>Select Fee</option>
+                                @foreach (\App\Models\FeeCategory::orderby('fee', 'asc')->get() as $fee)
+                                    <option value="{{ $fee->id }}">{{ $fee->fee }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Amount</label>
+                            <input type="number" name="amount" class="form-control"
+                                placeholder="Enter Amount i.e 15750">
+                            <input type="hidden" name="student_id" value="{{ $student->id }}">
+                        </div>
+                        <div class="col-12 form-group">
+                            <button type="submit" class="btn btn-secondary float-right make_pay">Make Payment</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -574,8 +606,12 @@
 
             $('.openProfileEditModal').on('click', function() {
                 $('#updateProfileModal').modal('show')
-
             })
+
+            $('.openfeePaymentModal').on('click', function() {
+                $('#feePaymentModal').modal('show')
+            })
+
         })
     </script>
 

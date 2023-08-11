@@ -99,15 +99,19 @@
                                                     <div class="trans-list">
                                                         <img src="{{ asset($student->photo) }}" alt=""
                                                             class="avatar avatar-sm me-3">
-                                                        <h4>{{ $student->firstname.' '.$student->lastname }}</h4>
+                                                        <h4>{{ $student->firstname . ' ' . $student->lastname }}</h4>
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td><span class="text-primary font-w600">{{ $student->registration_number }}</span></td>
-                                            <td>
-                                                {{$student->sex}}
+                                            <td><span
+                                                    class="text-primary font-w600">{{ $student->registration_number }}</span>
                                             </td>
-                                            <td><span class="doller font-w600">{{date('j F, Y',strtotime($student->dob))}} </span></td>
+                                            <td>
+                                                {{ $student->sex }}
+                                            </td>
+                                            <td><span
+                                                    class="doller font-w600">{{ date('j F, Y', strtotime($student->dob)) }}
+                                                </span></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -182,26 +186,73 @@
                 <div class="card-body">
                     <h6 class="mb-0 text-muted">Grade Teacher</h6>
                     <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <ul>
-                                <li class="fs-4 fw-bold text-primary">
-                                    <i class="la la-user "> </i> Janet Jones
-                                </li>
+                        @if ($grade->teacher)
+                            <div>
+                                <ul>
+                                    <li class="fs-4 fw-bold text-primary">
+                                        <i class="la la-user "> </i> {{ $grade->teacher->name }}
+                                    </li>
 
-                                <li>
-                                    <i class="la la-user text-white "> </i> 10 Aug 2023
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <img src="{{ asset('assets/images/avatar/3.jpg') }}" class="avatar avatar-lg" alt="">
-                        </div>
+                                    <li>
+                                        <i class="la la-user text-white "> </i>{{ $grade->teacher->date_of_birth }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <img src="{{ asset($grade->teacher->photo) }}" class="avatar avatar-lg" alt="">
+                            </div>
+                        @else
+                        <h4 class="fs-4 fw-bold text-primary">
+                            <i class="la la-user "> </i> No Teacher Assigned
+                        </h4>
+                        @endif
                     </div>
                     <div class="d-flex justify-content-between mt-2 ">
-                        <a class="btn btn-primary btn-sm py-1" href="javascript:; "> Assign New Teacher</a>
-                        <a class="btn btn-danger btm-sm py-1" href="javascript:; "> Remove Teacher</a>
+                        <a class="btn btn-primary btn-sm py-1 openassignTeacherModal" href="javascript:; "> Assign New
+                            Teacher</a>
+                        @if ($grade->teacher)
+                            <a class="btn btn-info btm-sm py-1" href="/admin/staff/{{ $grade->teacher->id }}"> Teacher
+                                Profile</a>
+                        @endif
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="assignTeacherModal">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assign Class Teacher </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert text-white bg-info">
+                        Teacher will be in charge of posting notes and assign for class
+                    </div>
+                    <form method="post" action="/admin/assign-teacher" class="row">@csrf
+                        <div class="col-md-12 form-group">
+                            <label>Teacher</label>
+                            <input type="hidden" name="class_id" value="{{ $grade->id }}">
+                            <select name="user_id" class="form-control">
+                                <option disabled selected>Select Class Teacher</option>
+                                @foreach (\App\Models\User::orderby('name', 'asc')->get() as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-2 d-flex justify-content-end form-group">
+                            <button type="submit" class="btn btn-secondary float-right ">Assign Teacher</button>
+                        </div>
+                    </form>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -209,4 +260,11 @@
 
 
 @push('scripts')
+    <script>
+        $(function() {
+            $('.openassignTeacherModal').on('click', function() {
+                $('#assignTeacherModal').modal('show');
+            })
+        })
+    </script>
 @endpush

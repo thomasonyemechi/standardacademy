@@ -14,10 +14,7 @@ class ClassController extends Controller
 
     function classProfileIndex($class_id)
     {
-        $grade = ClassCore::with(['students'])->findOrFail($class_id);
-
-
-
+        $grade = ClassCore::with(['students', 'teacher'])->findOrFail($class_id);
         $term_id = $this->currentTerm()->id;
         $fees = Payment::where(['class_id' => $class_id, 'type' => 1, 'term_id' => $term_id ])->sum('total');
         $payments = Payment::where(['class_id' => $class_id, 'type' => 5, 'term_id' => $term_id ])->sum('total');
@@ -25,11 +22,24 @@ class ClassController extends Controller
         return view('admin.class-profile', compact(['grade', 'payments', 'fees']));
     }
 
+    function assignClassTeacher(Request $request)
+    {
+        Validator::make($request->all(), [
+            'class_id' => 'required|exists:class_cores,id',
+            'user_id' => 'required|exists:users,id'
+        ])->validate();
+
+        ClassCore::where('id', $request->class_id)->update([
+            'class_teacher' => $request->user_id
+        ]);
+        return back()->with('success', 'Teacher has been assigned');
+    }
+
 
     function classIndex()
     {
         $categories = ClassCategory::orderby('category','asc')->get();
-        $classes = ClassCore::with(['category:id,category'])->withCount('students')->orderby('index','asc')->get();
+        $classes = ClassCore::with(['category:id,category', 'teacher:id,name,photo', 'created_by:id,name'])->withCount('students')->orderby('index','asc')->get();
         return view('admin.manage_class', compact(['categories', 'classes']));
     }
 

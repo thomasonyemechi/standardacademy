@@ -46,7 +46,6 @@
                 <i class="material-symbols-outlined">home</i>
                     <span class="nav-text">Manage Fees</span>
                 </a>
-
             </li>
 
 
@@ -55,6 +54,28 @@
                     <i class="material-icons">article</i>
                 <span class="nav-text">Session and Term</span>
             </a>
+
+
+            <li>
+                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="material-icons">article</i>
+                    <span class="nav-text">Lesson Notes</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="/admin/create-note">Create Note</a></li>
+                    <li><a href="#">Note List</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="material-icons">article</i>
+                    <span class="nav-text">Manage</span>
+                </a>
+            </li>
+
+
 
         </li>
 

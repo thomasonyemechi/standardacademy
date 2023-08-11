@@ -16,7 +16,7 @@
                             </h3>
                             <button class="btn btn-secondary btn-sm openClassModal">Create Class</button>
                         </div>
-                        <div class="card-body p-1">
+                        <div class="card-body p-0 wow fadeInUp" data-wow-delay="1.5s">
                             <div class="table-responsive">
                                 <table id="example1" class="table mb-0 table-bordered table-hover table-striped">
                                     <thead>
@@ -25,7 +25,6 @@
                                             <th>Students</th>
                                             <th>Class Teacher</th>
                                             <th></th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -33,7 +32,13 @@
                                             <tr>
                                                 <td>{{ $class->class }}</td>
                                                 <td>{{ $class->students_count }}</td>
-                                                <td></td>
+                                                <td>
+                                                    <div class="trans-list">
+                                                        <img src="{{asset($class->teacher->photo ?? 'assets/images/staff/user.png')}}" alt="" class="avatar avatar-sm me-3">
+                                                        <h4> {{ $class->teacher->name ?? 'No Teacher Assigned' }}
+                                                        </h4>
+                                                    </div>
+                                                   </td>
                                                 <td>
                                                     <form action="/admin/order-class" method="post" >@csrf
                                                         <div class="align-items-center">

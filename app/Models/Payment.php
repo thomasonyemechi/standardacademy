@@ -12,7 +12,7 @@ class Payment extends Model
 
     function fee_cat()
     {
-        return $this->belongsTo(FeeCategory::class, 'fe_id');
+        return $this->belongsTo(FeeCategory::class, 'fee_id');
     }
 
     function term()
@@ -28,5 +28,10 @@ class Payment extends Model
     function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

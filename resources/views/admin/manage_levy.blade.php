@@ -158,7 +158,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">@csrf
+                    <form action="/admin/set-fee" method="post">@csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class=" form-group">

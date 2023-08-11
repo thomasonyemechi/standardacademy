@@ -14,11 +14,44 @@ class FeeController extends Controller
 
     function manageFeeIndex($fee_id = 0, $class_id = 0)
     {
-
         $fees = FeeCategory::orderby('fee', 'asc')->get();
         $classes = ClassCore::orderby('index', 'asc')->get();
         return view('admin.manage_levy', compact(['fees', 'classes', 'fee_id', 'class_id']));
     }
+
+
+    
+
+
+
+
+    function MakeFeePayment(Request $request)
+    {
+        Validator::make($request->all(), [
+            'student_id' => 'required|exists:students,id',
+            'amount' => 'required|integer',
+        ])->validate();
+
+        $student = Student::find($request->student_id);
+        Payment::create([
+            'term_id' => $this->currentTerm()->id,
+            'fee_id' => $request->fee_cat_id ?? 0,
+            'fee_index' => 0 ,
+            'class_id' => $student->class_id,
+            'student_id' => $student->id,
+            'total' => $request->amount,
+            'amount' => 0,
+            'discount' => 0,
+            'created_by' => auth()->user()->id,
+            'type' => 5
+        ]);
+        return back()->with([
+            'success' => 'Fee payment has been made',
+        ]);
+    }
+
+
+
 
     function viewFee(Request $request)
     {

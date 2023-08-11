@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StaffController;
@@ -51,6 +52,7 @@ Route::group([], function () {
         Route::get('/manage-class', [ClassController::class, 'classIndex']);
         Route::post('/create-class', [ClassController::class, 'createClass']);
         Route::post('/order-class', [ClassController::class, 'orderClass']);
+        Route::post('/assign-teacher', [ClassController::class, 'assignClassTeacher']);
         Route::get('/class-profile/{class_id}', [ClassController::class, 'classProfileIndex']);
 
         Route::get('/manage-subject', [SubjectController::class, 'subjectIndex']);
@@ -78,6 +80,13 @@ Route::group([], function () {
         Route::post('/update-fee', [FeeController::class, 'updateFeeCategory']);
         Route::post('/set-fee', [FeeController::class, 'setFees']);
         Route::post('/view-fee', [FeeController::class, 'viewFee']);
+        Route::post('/make-payment', [FeeController::class, 'MakeFeePayment']);
         Route::get('/fetch_fee/{fee}/{class}', [FeeController::class, 'fetSettedFee']);
+
+
+        Route::get('/create-note', [NoteController::class, 'createNoteIndex']);
+        Route::post('/create-note', [NoteController::class, 'createNote']);
+        Route::get('/add-content/{note_id}', [NoteController::class, 'addContentIndex']);
+
     });
 });

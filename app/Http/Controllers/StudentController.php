@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\ClassArm;
 use App\Models\ClassCore;
 use App\Models\Guardian;
+use App\Models\Payment;
 use App\Models\Student;
+use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -14,12 +16,36 @@ class StudentController extends Controller
 {
     function studentProfileIndex($student_id)
     {
+        $term_id = $this->currentTerm()->id;
         $parents = Guardian::orderby('guardian_name', 'asc')->get(['id', 'guardian_name']);
         $arms = ClassArm::orderby('arm', 'asc')->get();
         $classes = ClassCore::orderby('index', 'asc')->get();
         $student = Student::with(['parent', 'grade', 'arm'])->findorfail($student_id);
-        return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents']));
+        $payments = Payment::with(['fee_cat:id,fee', 'user:id,name'])->where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 5])->orderby('id', 'desc')->limit(25)->get();
+        $brought_forward = $this->calculateBalanceBroughtFwd($student_id, $term_id);
+        $fees = Payment::with(['fee_cat:id,fee',])->where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 1])->orderby('id', 'desc')->get();
+
+        return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents', 'payments', 'brought_forward', 'fees']));
     }
+
+
+
+    function calculateBalanceBroughtFwd($student_id, $term_id)
+    {
+        $prv_terms = Term::where('id', '<', $term_id)->get();
+        $amt = 0;
+        $paid = 0;
+        foreach ($prv_terms as $term) {
+            $amt += Payment::where(['student_id' => $student_id, 'term_id' => $term->id, 'type' => 1])->sum('total');
+            $paid += Payment::where(['student_id' => $student_id, 'term_id' => $term->id, 'type' => 5])->sum('total');
+        }
+
+        $paid += Payment::where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 5])->sum('total');
+        return [$amt, $paid];
+    }
+
+
+
 
 
     function allStudent()
@@ -124,7 +150,9 @@ class StudentController extends Controller
             $img = $request->file('image');
             $name = 'assets/images/students/' . $student->firstname . '_' . time() . rand() . '.' . $img->getClientOriginalExtension();
             move_uploaded_file($img, $name);
-            if ($oldname != 'assets/images/students/student.png') { @unlink($oldname); }
+            if ($oldname != 'assets/images/students/student.png') {
+                @unlink($oldname);
+            }
         }
         $student->update([
             'parent_id' => $request->guardian_id,

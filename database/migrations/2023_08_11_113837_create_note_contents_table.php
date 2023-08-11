@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_cores', function (Blueprint $table) {
+        Schema::create('note_contents', function (Blueprint $table) {
             $table->id();
-            $table->string('class');
-            $table->integer('index');
-            $table->integer('category_id');
-            $table->integer('class_teacher')->default(0);
-            $table->integer('created_by');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_cores');
+        Schema::dropIfExists('note_contents');
     }
 };

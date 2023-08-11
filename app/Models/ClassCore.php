@@ -20,5 +20,14 @@ class ClassCore extends Model
         return $this->hasMany(Student::class, 'class_id');
     }
 
+    function teacher()
+    {
+        return $this->belongsTo(User::class, 'class_teacher');
+    }
+
+    function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
     
 }
