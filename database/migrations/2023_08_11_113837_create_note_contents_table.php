@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('note_contents', function (Blueprint $table) {
             $table->id();
+            $table->integer('note_id');
+            $table->integer('week');
+            $table->string('topic');
+            $table->text('content');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

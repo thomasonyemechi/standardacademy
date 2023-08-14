@@ -63,7 +63,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="/admin/create-note">Create Note</a></li>
-                    <li><a href="#">Note List</a></li>
+                    <li><a href="/admin/content-list">Content List</a></li>
                 </ul>
             </li>
 

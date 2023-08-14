@@ -1,5 +1,5 @@
 <footer class="footer-section">
-    <div id="top-footer" class="overlay-2 section-back-image-2" data-background="{{ asset('main/assets/img/bg/footer-bg.jpg') }}">
+    <div id="top-footer" class="overlay-2 py-5 section-back-image-2" data-background="{{ asset('main/assets/img/bg/footer-bg.jpg') }}">
        <div class="auto-container">
           <div class="row">
              <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-lg-0 mb-md-5 mb-sm-5 mb-5">
@@ -29,8 +29,8 @@
                 </div>
                 <div class="footer-widget-inner">
                    <ul>
-                      <li><a href="#"><i class="icofont-circled-right"></i> About {{env('APP_NAME')}} </a></li>
-                      <li><a href="#"><i class="icofont-circled-right"></i> News & Events</a></li>
+                      <li><a href="/about"><i class="icofont-circled-right"></i> About {{env('APP_NAME')}} </a></li>
+                      <li><a href="/news"><i class="icofont-circled-right"></i> News & Events</a></li>
                    </ul>
                 </div>
              </div>

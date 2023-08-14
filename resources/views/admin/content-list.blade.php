@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('page_title')
-    Manage Lesson Notes
+    All Contents
 @endsection
 @section('page_content')
     <div class="row">
@@ -10,12 +10,7 @@
                 <div class="col-xl-12">
                     <div class="page-title flex-wrap">
                         <div>
-                            <h5>All Created Notes</h5>
-                        </div>
-                        <div>
-                            <a href="javascript:;" class="btn openfeePaymentModal btn-primary">
-                                + Lesson Note
-                            </a>
+                            <h5>All Grade Note Content</h5>
                         </div>
                     </div>
                 </div>
@@ -32,8 +27,8 @@
                                     <th>Subject</th>
                                     <th>Term/Session</th>
                                     <th>Class</th>
-                                    <th>Content</th>
-                                    <th>Date</th>
+                                    <th>Topic</th>
+                                    <th>Created</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>
@@ -41,7 +36,7 @@
                                 @php
                                     $bg = ['bg-secondary', 'bg-warning', 'bg-success', 'bg-primary', 'bg-danger'];
                                 @endphp
-                                @foreach ($notes as $note)
+                                @foreach ($gross_content as $note)
                                     @php
                                         $bg_c = $bg[rand(0, count($bg) - 1)];
                                     @endphp
@@ -101,7 +96,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end ">
-                    {{ $notes->links('pagination::bootstrap-4') }}
+                    {{-- {{ $notes->links('pagination::bootstrap-4') }} --}}
                 </div>
             </div>
         </div>

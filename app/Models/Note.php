@@ -24,4 +24,9 @@ class Note extends Model
     {
         return $this->belongsTo(Term::class, 'term_id');
     }
+    
+    function contents()
+    {
+        return $this->hasMany(NoteContent::class);
+    }
 }

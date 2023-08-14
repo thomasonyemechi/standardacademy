@@ -30,4 +30,14 @@ class WebviewController extends Controller
     {
         return view('fees');
     }
+
+    function galleryIndex()
+    {
+        return view('gallery');
+    }
+
+    function newsIndex()
+    {
+        return view('news');
+    }
 }

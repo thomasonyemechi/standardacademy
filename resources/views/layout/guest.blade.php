@@ -17,7 +17,7 @@
     <link href="{{ asset('main/assets/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800|Roboto:300,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('main/assets/css/icofont.min.css') }} ">
-    <link rel="stylesheet" href="{{ asset('main/assets/css/meanmenu.min.css') }} ') }} ">
+    <link rel="stylesheet" href="{{ asset('main/assets/css/meanmenu.min.css') }}">
     <link rel="stylesheet" href="{{ asset('main/assets/owlcarousel/css/owl.carousel.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('main/assets/owlcarousel/css/owl.theme.default.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('main/assets/css/animate.css') }} ">
@@ -27,7 +27,10 @@
 </head>
 
 <body id="main">
-
+    <div id="page-preloader">
+        <div class="loader"></div>
+        <div class="loa-shadow"></div>
+     </div>
 
     @include('layout.inc.web_header')
 

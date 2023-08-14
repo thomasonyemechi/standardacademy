@@ -1,38 +1,9 @@
 <header class="main-header">
-    <!-- START TOP AREA -->
-    <div class="top-area">
-        <div class="auto-container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-sm-12 col-12 text-lg-left text-center">
-                    <div class="header-social">
-                        <ul>
-                            <li><a href="#"><i class="icofont-facebook"></i></a></li>
-                            <li><a href="#"><i class="icofont-youtube"></i></a></li>
-                            <li><a href="#"><i class="icofont-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-8 col-md-12 col-sm-12 col-12 text-lg-right text-center">
-                    <div class="top-menu">
-                        <ul>
-                            <li><a href="#"><i class="icofont-location-pin"></i>7684+72H, Estate Rd, 340110,
-                                    Akure, Ondo</a></li>
-                            <li><a href="#"><i class="icofont-phone"></i> {{ env('SCHOOL_PHONE') }}</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
-        </div>
-    </div>
-    <!-- END TOP AREA -->
 
-    <!-- START LOGO AREA -->
-    <div class="logo-area">
+    <div class="logo-area py-0">
         <div class="auto-container">
             <div class="row">
-                <div class="col-lg-3 col-12 mx-auto text-lg-left text-center pl-0 mb-lg-0 mb-4">
+                <div class="col-lg-3 col-12 mx-auto text-lg-left  ">
                     <div class="logo">
                         <a href="/">
                             <img class="img-fluid pt-3" src="{{ asset('main/assets/img/logo.png') }}" alt="">
@@ -40,7 +11,7 @@
                     </div>
                 </div>
                 <!-- end col -->
-                <div class="col-lg-9 d-md-flex col-12">
+                <div class="col-lg-9 d-md-flex col-12 mb-md-2 	d-none d-md-block">
                     <div class="header-info-box">
                         <div class="header-info-icon">
                             <i class="icofont-envelope"></i>
@@ -63,13 +34,9 @@
                         <p>Mon - Fri : 08:00 - 16:00</p>
                     </div>
                 </div>
-                <!-- end col -->
             </div>
         </div>
     </div>
-    <!-- END LOGO AREA -->
-
-    <!-- START NAVIGATION AREA -->
     <div class="sticky-menu">
         <div class="mainmenu-area">
             <div class="auto-container">
@@ -80,7 +47,6 @@
                                 <li><a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li><a class="nav-link" href="/about">About Us</a></li>
-                                {{-- <li><a class="nav-link" href="#">Term Dates</a></li> --}}
                                 <li class="dropdown"><a class="nav-link" href="javascript:;">Admission & Fee</a>
                                     <ul class="dropdown-menu">
                                        <li><a href="/admission">How To Apply</a></li>
@@ -89,11 +55,11 @@
                                  </li>
                                  <li class="dropdown"><a class="nav-link" href="javascript:;">Media & Resources</a>
                                     <ul class="dropdown-menu">
-                                       <li><a href="#">Gallery </a></li>
+                                       <li><a href="/gallery">Gallery </a></li>
                                        <li><a href="#">Parent Login </a></li>
                                     </ul>    
                                  </li>
-                                <li><a class="nav-link" href="#">News</a>  </li>
+                                <li><a class="nav-link" href="/about">News</a>  </li>
                                 <li><a href="/contact" class="nav-link">Contact</a></li>
                             </ul>
                         </nav>
@@ -103,4 +69,7 @@
             </div>
         </div>
     </div>
+
+
+    
 </header>

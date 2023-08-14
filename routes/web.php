@@ -28,6 +28,8 @@ Route::get('/about', [WebviewController::class, 'aboutIndex']);
 Route::get('/contact', [WebviewController::class, 'contactIndex']);
 Route::get('/admission', [WebviewController::class, 'admissionIndex']);
 Route::get('/school-fees', [WebviewController::class, 'feesIndex']);
+Route::get('/gallery', [WebviewController::class, 'galleryIndex']);
+Route::get('/news', [WebviewController::class, 'newsIndex']);
 
 
 
@@ -85,8 +87,14 @@ Route::group([], function () {
 
 
         Route::get('/create-note', [NoteController::class, 'createNoteIndex']);
+        Route::get('/delete-note/{note_id}', [NoteController::class, 'deleteNote']);
         Route::post('/create-note', [NoteController::class, 'createNote']);
         Route::get('/add-content/{note_id}', [NoteController::class, 'addContentIndex']);
+        Route::post('/save-content', [NoteController::class, 'addNoteContent']);
+        Route::post('/update-content', [NoteController::class, 'updateContent']);
+        Route::get('/delete-content/{content_id}', [NoteController::class, 'deleteContent']);
+        Route::get('/note-content/{note_id}', [NoteController::class, 'noteContentIndex']);
+        Route::get('/note-list', [NoteController::class, 'contentListIndex']);
 
     });
 });
