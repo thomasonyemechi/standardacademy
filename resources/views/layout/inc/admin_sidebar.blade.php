@@ -59,11 +59,17 @@
             <li>
                 <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                     <i class="material-icons">article</i>
-                    <span class="nav-text">Lesson Notes</span>
+                    <span class="nav-text">Note/Assignment</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="/admin/create-note">Create Note</a></li>
-                    <li><a href="/admin/content-list">Content List</a></li>
+                    <li><a href="/admin/class-notes">Class Note</a></li>
+
+                    <li><a href="/admin/class-assignment"> <i class="la la-plus text-white " ></i>Assignment</a></li>
+                    <li><a href="/admin/class-assignment">View Assignment</a></li>
+
+
+
                 </ul>
             </li>
 

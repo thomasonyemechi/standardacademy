@@ -71,14 +71,26 @@
                                         </td>
 
                                         <td>
-                                            <span> {{$note->contents_count}} </span>
+                                            <span> {{ $note->contents_count }} </span>
                                         </td>
 
                                         <td>{{ date('j M, Y', strtotime($note->created_at)) }}</td>
 
 
                                         <td>
-                                            <div class="dropdown custom-dropdown float-end">
+
+                                            <div class="d-flex justify-content-end text-bold ">
+                                                <a href="/admin/note-content/{{ $note->id }}" target="_blank" title="View Note Content"
+                                                    class="btn me-2 btn-primary btn-sm py-1 px-2"> <i class="la la-eye"></i>
+                                                </a>
+                                                <a href="/admin/add-content/{{ $note->id }}" title="Add Note COntent"
+                                                    class="btn btn-success me-2 btn-sm py-1 px-2"> <i class="la la-plus"></i>
+                                                </a>
+                                                <a href="/admin/delete-note/{{ $note->id }}" title="Delete Note"
+                                                    class="btn me-2 btn-danger btn-sm py-1 px-2"> <i
+                                                        class="la la-trash"></i> </a>
+                                            </div>
+                                            {{-- <div class="dropdown custom-dropdown float-end">
                                                 <div class="btn sharp tp-btn " data-bs-toggle="dropdown">
                                                     <svg width="24" height="6" viewBox="0 0 24 6" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +104,7 @@
                                                     <a class="dropdown-item" href="/admin/delete-note/{{$note->id}}">Delete Note</a>
                                                     <a class="dropdown-item" href="/admin/add-content/{{$note->id}}">Add Note Content</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </td>
                                     </tr>
                                 @endforeach

@@ -95,6 +95,7 @@ Route::group([], function () {
         Route::get('/delete-content/{content_id}', [NoteController::class, 'deleteContent']);
         Route::get('/note-content/{note_id}', [NoteController::class, 'noteContentIndex']);
         Route::get('/note-list', [NoteController::class, 'contentListIndex']);
+        Route::get('/class-notes', [NoteController::class, 'classNoteIndex']);
 
     });
 });

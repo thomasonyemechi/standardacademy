@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
 {   
+    function classNoteIndex(Request $request)
+    {
+        $notes = []; $grade = [];
+        if($request->grade) {
+            $grade = ClassCore::findOrFail($request->grade);
+            $notes = Note::with(['subject:id,subject', 'user'])->withCount(['contents'])->where(['class_id' => $grade->id])->orderby('id', 'desc')->get();
+        }
+        $classes = ClassCore::orderby('index', 'asc')->get();
+        return view('admin.class_notes', compact(['classes', 'notes', 'grade']));
+    }
     function contentListIndex()
     {
         $my_class = ClassCore::where(['class_teacher' => 1 ])->get();
@@ -72,7 +82,7 @@ class NoteController extends Controller
     {
         $content = NoteContent::findOrFail($content_id);
         $content->delete();
-        return back()->with('success', 'Content has been deleted!');
+        return redirect('/admin/add-content/'.$content->note_id)->with('success', 'Content has been deleted!');
     }
 
     

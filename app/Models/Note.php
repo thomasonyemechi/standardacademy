@@ -29,4 +29,9 @@ class Note extends Model
     {
         return $this->hasMany(NoteContent::class);
     }
+
+    function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

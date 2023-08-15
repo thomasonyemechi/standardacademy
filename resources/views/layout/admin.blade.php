@@ -14,6 +14,7 @@
 
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
     <link href="{{ asset('assets/vendor/wow-master/css/libs/animate.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
@@ -98,6 +99,7 @@
     <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/wow-master/dist/wow.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.min.js') }}"></script>
