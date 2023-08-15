@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FeeController;
@@ -96,6 +97,13 @@ Route::group([], function () {
         Route::get('/note-content/{note_id}', [NoteController::class, 'noteContentIndex']);
         Route::get('/note-list', [NoteController::class, 'contentListIndex']);
         Route::get('/class-notes', [NoteController::class, 'classNoteIndex']);
+
+        Route::get('/create-assignment', [AssignmentController::class, 'createAssignmentIndex']);
+        Route::post('/create-assignment', [AssignmentController::class, 'createAssignment']);
+        Route::get('/delete-assignment/{assignment_id}', [AssignmentController::class, 'deleteAssignment']);
+        Route::post('/update-assignment', [AssignmentController::class, 'updateAssignment']);
+        Route::get('/class-assignment', [AssignmentController::class, 'classAssignmentIndex']);
+
 
     });
 });

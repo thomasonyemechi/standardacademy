@@ -65,24 +65,13 @@
                     <li><a href="/admin/create-note">Create Note</a></li>
                     <li><a href="/admin/class-notes">Class Note</a></li>
 
-                    <li><a href="/admin/class-assignment"> <i class="la la-plus text-white " ></i>Assignment</a></li>
+                    <li><a href="/admin/create-assignment"> <i class="la la-plus text-white " ></i>Assignment</a></li>
                     <li><a href="/admin/class-assignment">View Assignment</a></li>
 
 
 
                 </ul>
             </li>
-
-
-            <li>
-                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                    <i class="material-icons">article</i>
-                    <span class="nav-text">Manage</span>
-                </a>
-            </li>
-
-
-
         </li>
 
         </ul>

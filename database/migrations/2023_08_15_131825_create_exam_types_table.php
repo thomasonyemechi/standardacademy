@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('exam_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('class_id');
-            $table->integer('subject_id');
-            $table->integer('term_id');
-            $table->text('assignment');
+            $table->string('type');
             $table->integer('created_by');
             $table->timestamps();
         });
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('exam_types');
     }
 };
