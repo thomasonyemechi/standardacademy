@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CbtController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\ProspectiveCbtController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
@@ -104,6 +106,23 @@ Route::group([], function () {
         Route::post('/update-assignment', [AssignmentController::class, 'updateAssignment']);
         Route::get('/class-assignment', [AssignmentController::class, 'classAssignmentIndex']);
 
+        Route::get('/exam-types', [CbtController::class, 'examTypeIndex']);
+        Route::post('/create-exam-type', [CbtController::class, 'addtype']);
+        Route::post('/update-exam-type', [CbtController::class, 'updateType']);
+        Route::get('/delete-exam-type/{type_id}', [CbtController::class, 'deleteType']);
+        Route::get('/class-exams', [CbtController::class, 'examIndex']);
+        Route::post('/create-exam', [CbtController::class, 'addexam']);
+        Route::get('/question/{exam_id}', [CbtController::class, 'addQuestionIndex']);
+        Route::post('/add-question', [CbtController::class, 'submitQuestion']);
+        Route::post('/update-question', [CbtController::class, 'updateQuestion']);
 
+        ////prospectvie exams group route
+        Route::group(['prefix' => 'prospective/', 'as' => 'prospective.', 'middleware' => []], function () {
+            Route::get('/create-exam', [ProspectiveCbtController::class, 'createProExamIndex']);
+            Route::post('/create-exam', [ProspectiveCbtController::class, 'createProspectiveExam']);
+            Route::get('/question/{exam_id}', [ProspectiveCbtController::class, 'addQuestionIndex']);
+            Route::post('/add-question', [ProspectiveCbtController::class, 'submitQuestion']);
+            Route::post('/update-question', [ProspectiveCbtController::class, 'updateQuestion']);
+        });;
     });
 });

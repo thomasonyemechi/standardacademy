@@ -72,6 +72,27 @@
 
                 </ul>
             </li>
+
+            <li>
+                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="material-icons">article</i>
+                    <span class="nav-text">School CBT</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="/admin/exam-types">Exam Types</a></li>
+                    <li><a href="/admin/class-exams">Class Exams</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a class="" href="/admin/prospective/create-exam" aria-expanded="false">
+                    <i class="material-icons">article</i>
+                    <span class="nav-text">Entrance Exams</span>
+                </a>
+            </li>
+
+
         </li>
 
         </ul>

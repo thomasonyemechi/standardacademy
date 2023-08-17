@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('page_title')
-    Exam Type
+    Create Exams
 @endsection
 @section('page_content')
     <div class="row">
@@ -11,9 +11,13 @@
                     <div class="page-title flex-wrap">
                         <h4> Exam Types </h4>
                         <div>
-                            <a href="javascript:;" class="btn openTypeModal btn-primary">
+                            <a href="/admin/exam-types" class="btn btn-info">
                                 <i class="la la-plus"></i>
                                 Create Exam Type
+                            </a>
+                            <a href="javascript:;" class="btn openTypeModal btn-primary">
+                                <i class="la la-plus"></i>
+                                Create Exam
                             </a>
                         </div>
                     </div>
@@ -29,16 +33,17 @@
                                     <th>
                                         <input type="checkbox" class="form-check-input" id="checkAll" required="">
                                     </th>
-                                    <th>S/N</th>
+                                    <th>Subject</th>
+                                    <th>Class</th>
+                                    <th>Term</th>
                                     <th>Type</th>
-                                    <th>Status</th>
                                     <th>Created By</th>
                                     <th>Date</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($types as $type)
+                                @foreach ($exams as $exam)
                                     <tr>
                                         <td>
                                             <div class="checkbox me-0 align-self-center">
@@ -49,27 +54,36 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td> {{ $loop->iteration }} </td>
                                         <td>
-                                            <h4>{{ $type->type }} </h4>
+                                            <h4> {{$exam->subject->subject}} </h4>
                                         </td>
                                         <td>
-                                            <div class="badge bg-success ">
-                                                Active
+                                            <div class="badge bg-primary ">
+                                                {{$exam->grade->class}}
                                             </div>
                                         </td>
-                                        <td> {{ $type->user->name }} </td>
-                                        <td> {{ date('j M, Y', strtotime($type->created_at)) }} </td>
+                                        <td> {{ term_text($exam->term->term) }} | {{ $exam->term->session->session }} </td>
+                                        <td> {{ $exam->type->type }} </td>
+                                        <td> {{ $exam->user->name }} </td>
+                                        <td> {{ date('j M, Y', strtotime($exam->created_at)) }} </td>
 
                                         <td class="text-end">
                                             <div class="d-flex justify-content-end ">
-                                                <button  class="btn editType btn-primary me-2 py-1 px-2 " data-data="{{json_encode($type)}}" > <i class="la la-edit"></i>
-                                                </button>
-                                                <a href="javascript:;" class="btn btn-danger py-1 px-2 "> <i class="la la-trash"></i> </a>
+                                                <a href="/admin/question/{{$exam->id}}"  class="btn btn-info me-2 py-1 px-2 " title="Add exam questions" > <i class="la la-plus"> Questions</i>
+                                                </a>
+                                                <a href="javascript:;" class="btn  btn-danger py-1 px-2" title="Deactivate Exam" > <i class="la la-power-off"></i>  </a>
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <td colspan="12" >
+                                        <b class="text-danger" >Note: </b>
+                                        <span >
+                                            Exams In red color are deactivated, They will not be displayed for students to answer
+                                        </span>
+                                    </td>
+                                </tr>
                             </tbody>
 
                         </table>
@@ -86,17 +100,37 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mmt">Create Exam Type</h5>
+                    <h5 class="modal-title mmt">Create Exam</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/admin/create-exam-type" method="post">@csrf
-                        <div class="form-group">
+                    <form action="/admin/create-exam" class="row" method="post">@csrf
+                        <div class="form-group col-md-6 ">
                             <label>Exam Type</label>
-                            <input type="text" required name="type" class="form-control">
+                            <select name="exam_type" class="form-control">
+                                <option selected disabled>Select exam type</option>
+                                @foreach ($types as $type)
+                                    <option value="{{$type->id}}"> {{$type->type}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 ">
+                            <label>Subject</label>
+                            <select name="subject_id" class="form-control">
+                                <option selected disabled>Select subject</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{$subject->id}}"> {{$subject->subject}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group mt-2 col-md-12 ">
+                            <label>Grade</label>
+                            <select name="class_id" readonly class="form-control">
+                                    <option selected value="{{$class->id}}"> {{$class->class}}</option>
+                            </select>
                         </div>
                         <div class="form-group mt-2 d-flex  justify-content-end ">
-                            <button type="submit" class="btn btn-secondary ">Submit</button>
+                            <button type="submit" class="btn btn-secondary ">Create Exam</button>
                         </div>
                     </form>
                 </div>
@@ -105,45 +139,12 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="editTypeModal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title mmt">Edit Exam Type</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/admin/update-exam-type" method="post">@csrf
-                        <div class="form-group">
-                            <label>Exam Type</label>
-                            <input type="text" required name="type" class="form-control">
-                            <input type="hidden" name="type_id">
-                        </div>
-                        <div class="form-group mt-2 d-flex  justify-content-end ">
-                            <button type="submit" class="btn btn-secondary ">Update</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
 @endsection
 @push('scripts')
     <script>
         $(function() {
             $('.openTypeModal').on('click', function() {
                 $('#typeModal').modal('show');
-            })
-
-
-            $('body').on('click', '.editType', function() {
-                data = $(this).data('data')
-                modal = $('#editTypeModal')
-                modal.find('input[name="type"]').val(data.type)
-                modal.find('input[name="type_id"]').val(data.id)
-                modal.modal('show');
             })
         })
     </script>
