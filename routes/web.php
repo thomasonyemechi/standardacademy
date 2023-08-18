@@ -8,6 +8,7 @@ use App\Http\Controllers\FeeController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ProspectiveCbtController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
@@ -124,5 +125,9 @@ Route::group([], function () {
             Route::post('/add-question', [ProspectiveCbtController::class, 'submitQuestion']);
             Route::post('/update-question', [ProspectiveCbtController::class, 'updateQuestion']);
         });;
+
+        Route::get('/upload-result/{class_id?}/{subject_id?}', [ResultController::class, 'uploadResultIndex']);
+        Route::post('/start-result', [ResultController::class, 'uploadResultIndex']);
+
     });
 });
