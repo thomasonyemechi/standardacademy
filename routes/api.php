@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\ResultController;
+use App\Http\Controllers\TranscriptController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/update_school_fee_per_record', [FeeController::class, 'updateSchoolFeePerRecord']);
 
 Route::post('/update_school_fee_record', [FeeController::class, 'updateSchoolFeePerRecord_MultipleStudent']);
+Route::get('/admin/load-result/{class_id}/{subject_id}', [ResultController::class, 'loadResult']);
+
+Route::post('/update-student-result', [ResultController::class, 'editStudentResult']);
+Route::post('/update-all-student-result', [ResultController::class, 'editMultipleResult']);
+
+
+Route::get('/viewer/result/{result_id}', [TranscriptController::class, 'Trans']);
+Route::get('/broad/{clas_id}/{subject_id}', [ResultController::class, 'fetchSessionBroadSheet']);
+
+
 
 
 

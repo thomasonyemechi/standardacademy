@@ -177,24 +177,8 @@
                     </div>
 
 
-                    <div class="card dz-card">
-                        <div class="card-header flex-wrap border-0" id="default-tab">
-                            <h4 class="card-title">Default Tab</h4>
-                            <ul class="nav nav-tabs dzm-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active " id="home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#DefaultTab" type="button" role="tab"
-                                        aria-selected="true">Preview</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link " id="profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#DefaultTab-html" type="button" role="tab"
-                                        aria-selected="false">HTML</button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="tab-content" id="myTabContent">
+                    <div class="card dz-card p-0">
+                        <div class="tab-content p-0" id="myTabContent">
                             <div class="tab-pane fade show active" id="DefaultTab" role="tabpanel"
                                 aria-labelledby="home-tab">
                                 <div class="card-body pt-0">
@@ -269,15 +253,11 @@
                                             </div>
                                             <div class="tab-pane fade" id="profile">
                                                 <div class="pt-4">
-                                                    <h4>This is profile title</h4>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche tempor.
-                                                    </p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche tempor.
-                                                    </p>
+                                                    <h4 class="text-center text-secondary ">Current Term Result</h4>
+
+                                                    <div class="table-resposive" id="result-body">
+
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="contact">
@@ -326,17 +306,19 @@
                                                     <td class="sorting_1">
 
                                                         <div>
-                                                            <h6 class="mb-0 font-w600">#{{$pay->id}}</h6>
+                                                            <h6 class="mb-0 font-w600">#{{ $pay->id }}</h6>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <span> {{date('j M, Y H:i:s ',strtotime($pay->created_at))}} </span>
+                                                        <span> {{ date('j M, Y H:i:s ', strtotime($pay->created_at)) }}
+                                                        </span>
                                                     </td>
                                                     <td>
-                                                        <span class="doller font-w600">{{ money_format($pay->total) }}</span>
+                                                        <span
+                                                            class="doller font-w600">{{ money_format($pay->total) }}</span>
                                                     </td>
                                                     <td>
-                                                        <span> {{$pay->user->name}} </span>
+                                                        <span> {{ $pay->user->name }} </span>
                                                     </td>
                                                     <td class="pe-3">
                                                         <span class="text-success font-w600">Completed</span>
@@ -637,5 +619,24 @@
             $('.avatar-preview, #imagePreview').removeAttr('style');
             $('#imagePreview').css('background-image', 'url(`{{ asset($student->photo) }}`)');
         });
+    </script>
+
+    <script src="{{ asset('assets/js/results.js') }}"></script>
+    <script>
+        function checkResult() {
+            result_id = `{{ $result_id }}`
+
+            $.ajax({
+                method: 'get',
+                url: `/api/viewer/result/${result_id}`
+            }).done(function(res) {
+                console.log(res);
+                $('#result-body').html(ResultTemplate(res.data, ''))
+            }).fail(function(res) {
+                console.log(res);
+            })
+        }
+
+        checkResult();
     </script>
 @endpush

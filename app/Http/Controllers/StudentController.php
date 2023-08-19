@@ -6,6 +6,7 @@ use App\Models\ClassArm;
 use App\Models\ClassCore;
 use App\Models\Guardian;
 use App\Models\Payment;
+use App\Models\ResultSummary;
 use App\Models\Student;
 use App\Models\Term;
 use Illuminate\Http\Request;
@@ -25,7 +26,9 @@ class StudentController extends Controller
         $brought_forward = $this->calculateBalanceBroughtFwd($student_id, $term_id);
         $fees = Payment::with(['fee_cat:id,fee',])->where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 1])->orderby('id', 'desc')->get();
 
-        return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents', 'payments', 'brought_forward', 'fees']));
+        $result_id = ResultSummary::where(['student_id' => $student->id, 'term_id' => $term_id ])->first()->id ?? 0;
+        $results = ResultSummary::where(['student_id' => $student->id])->get();
+        return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents', 'payments', 'brought_forward', 'fees', 'result_id', 'results']));
     }
 
 

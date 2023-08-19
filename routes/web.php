@@ -127,7 +127,11 @@ Route::group([], function () {
         });;
 
         Route::get('/upload-result/{class_id?}/{subject_id?}', [ResultController::class, 'uploadResultIndex']);
-        Route::post('/start-result', [ResultController::class, 'uploadResultIndex']);
+        Route::post('/start-result-params', [ResultController::class, 'startResult2']);
+        Route::post('/view-broad-sheet', [ResultController::class, 'startResult3']);
+        Route::get('/load-result/{class_id}/{subject_id}', [ResultController::class, 'loadResult']);
+        Route::get('/braod-sheet/{class_id?}/{subject_id?}', [ResultController::class, 'uploadResultIndex']);
+
 
     });
 });
