@@ -14,6 +14,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\WebviewController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,25 +41,39 @@ Route::get('/news', [WebviewController::class, 'newsIndex']);
 Route::group([], function () {
 
     Route::view('/login', 'admin.login')->name('login');
+    Route::get('/logout',  function () {
+        Auth::logout();
+        return redirect('login')->with('success', 'You have been logged out');
+    });
     Route::post('/staff_login', [AuthController::class, 'staffLogin']);
 
-    Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => []], function () {
-        Route::get('/term-setup', [SessionController::class, 'termIndex']);
-        Route::post('/create-session', [SessionController::class, 'createSession']);
-        Route::post('/update-term', [SessionController::class, 'updateTermInfo']);
-        Route::get('/activate-term/{term_id}', [SessionController::class, 'activateTerm']);
+    Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth']], function () {
+        Route::get('/dashboard', [WebviewController::class, 'adminDashboard']);
 
-        Route::post('/create-class-category', [ClassController::class, 'createClassCategory']);
-        Route::post('/update-class-category', [ClassController::class, 'updateClassCategory']);
-        Route::get('/class-arms', [ClassController::class, 'categoryIndex']);
 
-        Route::post('/create-arm', [ClassController::class, 'createClassArm']);
-        Route::post('/update-arm', [ClassController::class, 'updateClassArm']);
+        /////admin accessible
+        Route::group(['middleware' => ['admin']], function () {
 
-        Route::get('/manage-class', [ClassController::class, 'classIndex']);
-        Route::post('/create-class', [ClassController::class, 'createClass']);
-        Route::post('/order-class', [ClassController::class, 'orderClass']);
-        Route::post('/assign-teacher', [ClassController::class, 'assignClassTeacher']);
+            Route::get('/term-setup', [SessionController::class, 'termIndex']);
+            Route::post('/create-session', [SessionController::class, 'createSession']);
+            Route::post('/update-term', [SessionController::class, 'updateTermInfo']);
+            Route::get('/activate-term/{term_id}', [SessionController::class, 'activateTerm']);
+
+            Route::post('/create-class-category', [ClassController::class, 'createClassCategory']);
+            Route::post('/update-class-category', [ClassController::class, 'updateClassCategory']);
+            Route::get('/class-arms', [ClassController::class, 'categoryIndex']);
+
+            Route::post('/create-arm', [ClassController::class, 'createClassArm']);
+            Route::post('/update-arm', [ClassController::class, 'updateClassArm']);
+
+            Route::get('/manage-class', [ClassController::class, 'classIndex']);
+            Route::post('/create-class', [ClassController::class, 'createClass']);
+            Route::post('/order-class', [ClassController::class, 'orderClass']);
+            Route::post('/assign-teacher', [ClassController::class, 'assignClassTeacher']);
+        });
+
+
+
         Route::get('/class-profile/{class_id}', [ClassController::class, 'classProfileIndex']);
 
         Route::get('/manage-subject', [SubjectController::class, 'subjectIndex']);
@@ -79,6 +94,7 @@ Route::group([], function () {
         Route::post('/create-staff-profile', [StaffController::class, 'createStaffProfile']);
         Route::get('/staffs', [StaffController::class, 'staffListIndex']);
         Route::get('/staff/{staff_id}', [StaffController::class, 'staffProfileIndex']);
+        Route::get('/staff-permission', [StaffController::class, 'permissionIndex']);
 
 
         Route::get('/manage-levy/{fe_id?}/{class_id?}', [FeeController::class, 'manageFeeIndex']);
@@ -130,8 +146,8 @@ Route::group([], function () {
         Route::post('/start-result-params', [ResultController::class, 'startResult2']);
         Route::post('/view-broad-sheet', [ResultController::class, 'startResult3']);
         Route::get('/load-result/{class_id}/{subject_id}', [ResultController::class, 'loadResult']);
-        Route::get('/braod-sheet/{class_id?}/{subject_id?}', [ResultController::class, 'uploadResultIndex']);
-
-
+        Route::get('/broad-sheet/{class_id?}/{subject_id?}', [ResultController::class, 'broadSheetIndex']);
+        Route::get('/class-result/{class_id?}', [ResultController::class, 'classResultIndex']);
+        Route::post('/update-result-remark', [ResultController::class, 'updateComment']);
     });
 });

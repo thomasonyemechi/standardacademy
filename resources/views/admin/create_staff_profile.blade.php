@@ -44,7 +44,7 @@
                                                 <label class="form-label text-primary">Staff
                                                     Role<span class="required">*</span></label>
                                                 <select name="role" class="form-control" id="">
-                                                    <option>Adminstrator</option>
+                                                    <option>Administrator</option>
                                                     <option>Teacher</option>
                                                     <option>Bursar</option>
                                                     <option>Others</option>

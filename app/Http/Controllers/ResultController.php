@@ -40,6 +40,15 @@ class ResultController extends Controller
         return view('admin.result_broadsheet', compact(['class', 'subjects', 'class_id', 'subject_id']));
     }
 
+    function classResultIndex($class_id=0)
+    {
+        $class = ClassCore::where('class_teacher', auth()->user()->id)->first();
+        if ($class_id > 0) {
+            $grade = ClassCore::findOrFail($class_id);
+        }
+
+        return view('admin.class_result', compact(['class', 'class_id']));
+    }
 
     function startResult2(Request $request)
     {
@@ -175,7 +184,7 @@ class ResultController extends Controller
             $terms[] = $term->id;
         }
         $arr = ['t1', 't2', 't3', 'exam', 'total'];
-        $students = Student::where(['class_id' => $class_id, 'status' => 1])->get(['id', 'surname', 'firstname']);
+        $students = Student::where(['class_id' => $class_id, 'status' => 1])->orderby('surname', 'asc')->get(['id', 'surname', 'firstname']);
         foreach($students as $stu) {
             $data = $stu;
 
@@ -190,5 +199,23 @@ class ResultController extends Controller
             'setup' => ResultSetup::first(),
         ]);
     }
+
+
+    function updateComment(Request $request)
+    {
+        $val = Validator::make($request->all(), [
+            'id' => 'required|exists:result_summaries,id',
+            'principal' => 'required',
+            'teacher' => 'required',
+        ])->validate();
+        ResultSummary::where('id', $request->id)->update([
+            'principal_remark' => $request->principal,
+            'teacher_remark' => $request->teacher
+        ]);
+        return back()->with('success', 'Result remarks has been updated!');
+
+    }
+
+
 
 }

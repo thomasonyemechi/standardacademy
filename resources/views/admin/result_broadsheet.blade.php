@@ -21,7 +21,7 @@
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <div class="dataTables_wrapper no-footer">
-                            <table class="display dataTable no-footer" style="min-width: 100%">
+                            <table class="display table-bordered dataTable no-footer" style="min-width: 100%">
                                 <thead>
                                     <tr>
                                         <td colspan="2"></td>
@@ -72,7 +72,7 @@
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Start Class Result </h5>
+                    <h5 class="modal-title">View BroadSheet </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class=" mt-2 d-flex justify-content-end">
-                            <button class="btn btn-primary">Start Result</button>
+                            <button class="btn btn-primary">View</button>
                         </div>
                     </form>
                 </div>
@@ -116,6 +116,19 @@
             var subject_id = `{{ $subject_id }}`;
 
 
+            function checkRes(res) {
+                obj = res;
+                if (res == null) {
+                    obj = {
+                        t1: 0,
+                        t2: 0,
+                        t3: 0,
+                        exam: 0,
+                        total: 0
+                    }
+                }
+                return obj;
+            }
 
             function loadProgram() {
                 if (class_id == 0 || subject_id == 0) {
@@ -125,7 +138,7 @@
                 $.ajax({
                     method: 'get',
                     url: `/api/broad/${class_id}/${subject_id}`,
-                    beforeSend:() => {
+                    beforeSend: () => {
                         body.html(`
                             <tr>
                                 <td colspan="20">
@@ -138,6 +151,7 @@
                         `)
                     }
                 }).done(function(res) {
+                    console.log(res);
                     $('.t_text').html(`${res.cap} Broad Sheet`);
                     body = $('#result_body');
                     set = res.setup;
@@ -146,9 +160,13 @@
                         first = checkRes(stu.first);
                         second = checkRes(stu.second);
                         third = checkRes(stu.third);
-                        total = first.total + second.total + third.total ;
-                        divisor = ((first.total > 0) ? 1 : 0) + ((second.total > 0) ? 1 : 0) + ((third.total > 0) ? 1 : 0);
-                        ef = total/divisor;
+                        total = first.total + second.total + third.total;
+                        divisor = ((first.total > 0) ? 1 : 0) + ((second.total > 0) ? 1 : 0) + ((
+                            third.total > 0) ? 1 : 0);
+                        ef = parseInt(total) / parseInt(divisor);  
+                        if(isNaN(ef)) {
+                            ef = 0;
+                        }
                         body.append(`
                             <tr class="single">
                                 <td>${index+1}</td>

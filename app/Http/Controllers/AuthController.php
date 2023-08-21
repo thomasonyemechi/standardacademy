@@ -18,7 +18,7 @@ class AuthController extends Controller
         ])->validate();
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
-            return redirect('/admin/term-setup')->with('success', 'Welcome Back');
+            return redirect('/admin/dashboard')->with('success', 'Welcome Back');
         }
 
         return back()->with('error', 'Invalid Credentials, Try again!');

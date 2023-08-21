@@ -44,4 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function permission()
+    {
+        return $this->hasOne(Permission::class);
+    }
+
+    function grade()
+    {
+        return $this->hasOne(ClassCore::class, 'class_teacher');
+    }
 }

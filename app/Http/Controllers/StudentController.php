@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use App\Models\ClassArm;
 use App\Models\ClassCore;
 use App\Models\Guardian;
@@ -28,7 +29,8 @@ class StudentController extends Controller
 
         $result_id = ResultSummary::where(['student_id' => $student->id, 'term_id' => $term_id ])->first()->id ?? 0;
         $results = ResultSummary::where(['student_id' => $student->id])->get();
-        return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents', 'payments', 'brought_forward', 'fees', 'result_id', 'results']));
+        $assignments = Assignment::with(['subject:id,subject'])->where(['class_id' => $student->class_id, 'term_id' => $term_id])->orderby('updated_at', 'asc')->get();
+        return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents', 'payments', 'brought_forward', 'fees', 'result_id', 'results', 'assignments']));
     }
 
 

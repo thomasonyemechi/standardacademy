@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TranscriptController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,10 @@ Route::post('/update-all-student-result', [ResultController::class, 'editMultipl
 Route::get('/viewer/result/{result_id}', [TranscriptController::class, 'Trans']);
 Route::get('/broad/{clas_id}/{subject_id}', [ResultController::class, 'fetchSessionBroadSheet']);
 
+Route::get('/class-result/{class_id}', [TranscriptController::class, 'classTermResult']);
 
+Route::get('/users-permission', [StaffController::class, 'fetchUserPermission']);
 
+Route::post('/permission-update', [StaffController::class, 'updatePermissionAll']);
 
 

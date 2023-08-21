@@ -141,10 +141,7 @@
                         $status = $staff->status;
                         $bg = $status == 1 ? 'bg-success' : 'bg-danger';
                         $title = $status == 1 ? 'Active Profile' : 'In-active Profile';
-                        $message =
-                            $status == 1
-                                ? 'User can login and perform all tasks and functions assgined '
-                                : 'User cannot login and assgined tasks cannot be carried out';
+                        $message = $status == 1 ? 'User can login and perform all tasks and functions assgined ' : 'User cannot login and assgined tasks cannot be carried out';
                     @endphp
                     <div class="card  {{ $bg }} ">
                         <div class="card-body ">
@@ -156,24 +153,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-12 col-sm-6">
-                    <div class="card schedule-card-1">
-                        <div class="card-body">
-                            <h4 class="mb-0">Assigned Class</h4>
-                            <p>Grade V</p>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <ul>
-                                        <li>
-                                            <i class="la la-user"></i>
-                                            20 Students
-                                        </li>
-                                    </ul>
+
+
+                @if ($class_teacher)
+                    <div class="col-xl-12 col-sm-6">
+                        <div class="card schedule-card-1">
+                            <div class="card-body">
+                                <h4 class="mb-0">Assigned Class</h4>
+                                <a href="/admin/class/{{$class_teacher->id}}"><p> {{$class_teacher->class}} </p></a>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                <i class="la la-user"></i>
+                                                {{$class_teacher->students_count}} Students
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
+
                 <div class="col-xl-12 col-sm-6">
                     <div class="card schedule-card-2">
                         <div class="card-body">
@@ -183,11 +185,11 @@
                                 <div>
                                     <ul>
                                         <li class="mb-2 text-success">
-                                            <i class="la la-arrow-right" ></i>
+                                            <i class="la la-arrow-right"></i>
                                             #20,000 | Salary Paymment
                                         </li>
-                                        <li class="text-danger" >
-                                            <i class="la la-arrow-left" ></i>
+                                        <li class="text-danger">
+                                            <i class="la la-arrow-left"></i>
                                             #5,000 | Advance Request
                                         </li>
                                     </ul>

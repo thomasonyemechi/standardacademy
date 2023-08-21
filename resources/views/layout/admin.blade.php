@@ -30,6 +30,10 @@
 
 </head>
 
+@php
+    $user = auth()->user();
+    $role = $user->role
+@endphp
 
 
 

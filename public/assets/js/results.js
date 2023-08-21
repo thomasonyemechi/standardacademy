@@ -74,7 +74,7 @@ function ResultTemplate(result, set) {
                             <table width="100%">
                                 <tr>
                                     <td width="15%">
-                                        <img class="avatar avatar-xl" src="http://127.0.0.1:840/assets/images/logo.jpg"">
+                                        <img class="avatar avatar-xl" src="http://127.0.0.1:840/assets/images/logo2.png"">
                                     </td>
                                     <td width="70%">
                                         <div class="text-center">
@@ -205,33 +205,3 @@ $('body').on('click', '.up_rem', function () {
     $(modal).find('.modal-title').html(`Update Remark ${data.name}`);
 })
 
-
-$('body').on('click', '.updateRemark', function (e) {
-    e.preventDefault();
-    modal = $('#updateRemark');
-    p = $(modal).find('input[name="principal"]').val();
-    t = $(modal).find('input[name="teacher"]').val();
-    id = $(modal).find('input[name="id"]').val();
-
-    $.ajax({
-        method: 'post',
-        url: api_url + 'result/update_remark',
-        data: {
-            result_id: id,
-            principal_remark: p,
-            teacher_remark: t
-        },
-        beforeSend: () => {
-            btnProcess('.updateRemark', '', 'before');
-        }
-    }).done(function (res) {
-        littleAlert(res.message);
-        btnProcess('.updateRemark', 'Update', 'after');
-        $('.t_rem').html(t);
-        $('.p_rem').html(p);
-        modal.modal('hide');
-    }).fail(function (res) {
-        parseError(res.responseJSON);
-        btnProcess('.updateRemark', 'Update', 'after');
-    })
-})
