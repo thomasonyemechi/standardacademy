@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CbtController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\FeeController;
@@ -36,11 +37,32 @@ Route::get('/school-fees', [WebviewController::class, 'feesIndex']);
 Route::get('/gallery', [WebviewController::class, 'galleryIndex']);
 Route::get('/news', [WebviewController::class, 'newsIndex']);
 
+Route::get('/news/{slug}', [BlogController::class, 'blogSingleIndex']);
+Route::get('/news', [BlogController::class, 'blogsIndex']);
+
 
 
 Route::group([], function () {
 
-    Route::view('/login', 'admin.login')->name('login');
+    // guardian Routes
+
+
+
+
+
+    Route::view('/guardian/login', 'parent.login')->name('login');
+    Route::post('/guardian-login', [ParentController::class, 'guardianLogin']);
+    Route::get('/parent_logout',  function () {
+        Auth::guard('guardian')->logout();
+        return redirect('guardian.login')->with('success', 'You have been logged out');
+    });
+    Route::group(['prefix' => 'guardian/', 'as' => 'guardian.', 'middleware' => ['auth:guardian']], function () {
+        Route::get('/', [ParentController::class, 'parentDashboardIndex']);
+
+    });
+
+
+    Route::view('/login', 'admin.login')->name('guardian.login');
     Route::get('/logout',  function () {
         Auth::logout();
         return redirect('login')->with('success', 'You have been logged out');
@@ -149,5 +171,10 @@ Route::group([], function () {
         Route::get('/broad-sheet/{class_id?}/{subject_id?}', [ResultController::class, 'broadSheetIndex']);
         Route::get('/class-result/{class_id?}', [ResultController::class, 'classResultIndex']);
         Route::post('/update-result-remark', [ResultController::class, 'updateComment']);
+
+        Route::get('/create-post', [BlogController::class, 'blogIndex']);
+        Route::post('/create-post', [BlogController::class, 'createPost']);
+        Route::post('/update-post', [BlogController::class, 'updatePost']);
+
     });
 });

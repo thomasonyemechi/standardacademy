@@ -26,13 +26,7 @@
                         <h5>Call For Inquiry</h5>
                         <p class="text-sm">{{ env('SCHOOL_PHONE') }}</p>
                     </div>
-                    <div class="header-info-box">
-                        <div class="header-info-icon">
-                            <i class="icofont-eye-open"></i>
-                        </div>
-                        <h5>Opening hours</h5>
-                        <p>Mon - Fri : 08:00 - 16:00</p>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -59,7 +53,7 @@
                                        <li><a href="#">Parent Login </a></li>
                                     </ul>    
                                  </li>
-                                <li><a class="nav-link" href="/about">News</a>  </li>
+                                <li><a class="nav-link" href="/news">News</a>  </li>
                                 <li><a href="/contact" class="nav-link">Contact</a></li>
                             </ul>
                         </nav>

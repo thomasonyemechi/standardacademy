@@ -11,7 +11,7 @@
                    </div>
                 </div>
                 <div class="footer-widget-inner">
-                   <p>7684+72H, Estate Rd, 340110, Akure, Ondo</p>
+                   <p>{{ env('SCHOOL_ADDRESS') }}</p>
                    <div class="img-menu float-lg-left float-none mt-3">
                       <div class="footer-social">
                          <ul>

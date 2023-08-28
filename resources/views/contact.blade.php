@@ -1,4 +1,7 @@
 @extends('layout.guest')
+@section('page_title')
+    Standard academy - Contact 
+@endsection
 @section('page_content')
 
 <div class="page-banner page-banner-overlay" data-background="main/assets/img/bg/banner-bg.jpg">

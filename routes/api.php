@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TranscriptController;
@@ -41,3 +42,4 @@ Route::get('/users-permission', [StaffController::class, 'fetchUserPermission'])
 Route::post('/permission-update', [StaffController::class, 'updatePermissionAll']);
 
 
+Route::post('/guardian-login', [ParentController::class, 'guardianLogin']);

@@ -28,7 +28,7 @@
                     <ul aria-expanded="false">
                         <li><a href="/admin/add-staff">Create Staff Profile</a></li>
                         <li><a href="/admin/staffs">Staff List</a></li>
-                        {{-- <li><a href="/admin/staff-permission">Staff Permission</a></li> --}}
+                        {{-- <li><a href="/admin/staff-perimssion">Staff Permission</a></li> --}}
                     </ul>
 
                 </li>
@@ -41,6 +41,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="/admin/manage-class">Create Class</a></li>
+                        <li><a href="/admin/class-arms">Arms / Category</a></li>
                         <li><a href="/admin/manage-subject">Create Subject</a></li>
                     </ul>
                 </li>
@@ -101,6 +102,7 @@
                         <li><a href="/admin/upload-result">Upload Result </a></li>
                         <li><a href="/admin/broad-sheet">Class Broad Sheet</a></li>
                     @endif
+                    <li><a href="#">Class Broad Sheet</a></li>
                 </ul>
             </li>
 

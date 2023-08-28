@@ -1,4 +1,7 @@
 @extends('layout.guest')
+@section('page_title')
+    Standard academy - School Fee
+@endsection
 @section('page_content')
     <section id="singleteacher" class="section-padding">
         <div class="auto-container">

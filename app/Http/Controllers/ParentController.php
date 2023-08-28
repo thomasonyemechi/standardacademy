@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guardian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,5 +50,38 @@ class ParentController extends Controller
         return back()->with('success', 'Guardian profile has been created');
     }
 
+
+    function guardianLogin(Request $request)
+    {
+        Validator::make($request->all(), [
+            'email' => 'required|exists:guardians,guardian_email',
+            'password' => 'required|string|min:3'
+        ])->validate();
+
+        $guardian = Guardian::where(['guardian_email' => $request->email, 'guardian_phone' => $request->password])->first();
+
+        if(!$guardian) {
+            return back()->with('error', 'Invalid login detials');
+        }
+
+        $ath = Auth::guard('guardian')->login($guardian);
+
+        return redirect('/guardian/')->with('success', 'Welcome back');
+    }
+
+
+
+
+    // after login functions
+    function guardian()
+    {
+        return Auth::guard('guardian')->user();
+    }
+
+    function parentDashboardIndex()
+    {
+
+        return view('parent.index');
+    }
 
 }

@@ -26,54 +26,33 @@
                     </div>
                     <div class="welcome-section-title">
                         <h6 class="theme-color">Welcome To Our School</h6>
-                        <h2>About  {{env('APP_NAME')}} </h2>
+                        <h2>Meet The Director</h2>
 
                         <div style="">
 
                             <p>
-                                In the heart of our community lies a haven of learning, laughter, and growth –
-                                {{ env('APP_NAME') }}.
-                                This institution stands as a beacon of education, where bright-eyed children embark on their
-                                journey to
-                                knowledge, discovery, and personal development.
+                                Deaconess Adekemi Adebayo is a seasoned educationalist with wild range of expereience in various fields of work.
+                                She started her carrer with Halliburton, a multinational oil servicing company in Port Harcourt as a laboratory chemist
+                                in the cementing department. she worked for eighteen years and rose to the position of principal scientist chemist. In course 
+                                of her work, she attended various traning schools in USA, UK & Scotland.
+
                             </p>
+                            <b>
+                                Due to her passion for education sector, she took early retirement in 2008 to pursue her long time vision
+                                in child up-bringing, teaching and traning.
+                            </b>
                             <p>
-                                At {{ env('APP_NAME') }}, education is not just about textbooks and exams; it's about
-                                fostering a holistic
-                                learning experience that empowers students to become confident, compassionate individuals.
-                                The dedicated team of
-                                educators understands that each child is unique, and their teaching methods reflect this
-                                understanding.
+                                A university graduate with a B.Sc degre in Chemistry, she added sevral engineering traning certificates obtained whle while working
+                                int the oil industry.
                             </p>
+
                             <p>
-                                Walk through the vibrant hallways of {{ env('APP_NAME') }}, and you'll witness classrooms
-                                that are more than just
-                                spaces of instruction – they're centers of curiosity. Interactive displays, colorful
-                                artwork, and an array of
-                                learning materials adorn the walls, creating an environment that sparks interest and
-                                engagement. The teachers,
-                                passionate and caring, go beyond the role of instructors; they become mentors, guiding
-                                students through the maze
-                                of knowledge with patience and enthusiasm.
+                                Furthermore, in the pursuit of her vision in education, just after her retirement, she went ahead and obtained some educational
+                                degrees includin PGD in education; M.Ed in school adminstration and planning; Diploma in montessori; Diploma In Early year  Foundation school
+                                and many numbrous courses to enhance 21st century teaching and learning delivery methods and techniques 
                             </p>
-                            <p>
-                                Parents are not just spectators in this educational journey; they are valued partners.
-                                {{ env('APP_NAME') }}
-                                fosters an open line of communication between parents, teachers, and students. Regular
-                                parent-teacher meetings,
-                                workshops, and events provide opportunities for meaningful interactions that contribute to
-                                the overall growth
-                                of each child.
-                            </p>
-                            <p>
-                                As {{ env('APP_NAME') }} continues to nurture young minds, it stands as a testament to the
-                                power of education
-                                in shaping individuals and communities. Beyond the academic accolades, it's a place where
-                                friendships are forged,
-                                passions are discovered, and dreams take flight. With a blend of innovation, compassion, and
-                                dedication,
-                                {{ env('APP_NAME') }} paves the way for a generation of thinkers, doers, and leaders.
-                            </p>
+
+                   
                         </div>
                     </div>
                 </div>

@@ -133,19 +133,27 @@
                                 <thead>
                                     <tr>
                                         <th>Subject</th>
-                                        <th>Topic</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr>
-                                        <td>
-                                            <h5>$70,000</h5>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-sm badge-success light">completed</span>
-                                        </td>
-                                    </tr>
+                                    @foreach ($notes as $note)
+                                        <tr>
+                                            <td>
+                                                <h5> {{ $note->subject->subject }} </h5>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-end text-bold ">
+                                                    <a href="/admin/note-content/{{ $note->id }}" target="_blank"
+                                                        title="View Note Content"
+                                                        class="btn me-2 btn-primary btn-sm py-1 px-2">
+                                                        <i class="la la-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -164,15 +172,26 @@
                                 <thead>
                                     <tr>
                                         <th>Subject</th>
-                                        <th>Topic</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr>
-                                        <td>English</td>
-                                        <td>completed</td>
-                                    </tr>
+                                    @foreach ($assignments as $ass)
+                                        <tr>
+                                            <td><h5>{{$ass->subject->subject}}</h5></td>
+                                            <td>
+                                                <div class="d-flex justify-content-end text-bold ">
+                                                    <a href="#" target="_blank"
+                                                        title="View Note Content"
+                                                        class="btn me-2 btn-primary btn-sm py-1 px-2">
+                                                        <i class="la la-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -202,9 +221,9 @@
                                 <img src="{{ asset($grade->teacher->photo) }}" class="avatar avatar-lg" alt="">
                             </div>
                         @else
-                        <h4 class="fs-4 fw-bold text-primary">
-                            <i class="la la-user "> </i> No Teacher Assigned
-                        </h4>
+                            <h4 class="fs-4 fw-bold text-primary">
+                                <i class="la la-user "> </i> No Teacher Assigned
+                            </h4>
                         @endif
                     </div>
                     <div class="d-flex justify-content-between mt-2 ">

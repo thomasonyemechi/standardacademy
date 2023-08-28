@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use App\Models\ClassArm;
 use App\Models\ClassCategory;
 use App\Models\ClassCore;
+use App\Models\Note;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,8 +20,9 @@ class ClassController extends Controller
         $term_id = $this->currentTerm()->id;
         $fees = Payment::where(['class_id' => $class_id, 'type' => 1, 'term_id' => $term_id ])->sum('total');
         $payments = Payment::where(['class_id' => $class_id, 'type' => 5, 'term_id' => $term_id ])->sum('total');
-
-        return view('admin.class-profile', compact(['grade', 'payments', 'fees']));
+        $notes = Note::with(['subject:id,subject'])->withCount(['contents'])->where(['class_id' => $class_id, 'term_id' => $term_id])->get();
+        $assignments = Assignment::with(['subject:id,subject'])->where(['class_id' => $class_id, 'term_id' => $term_id])->limit(25)->get();
+        return view('admin.class-profile', compact(['grade', 'payments', 'fees', 'notes', 'assignments']));
     }
 
     function assignClassTeacher(Request $request)

@@ -3,19 +3,59 @@
     <section id="singleteacher" class="section-padding">
         <div class="auto-container">
             <div class="row">
-                <div class="col-lg-8 offset-md-2 col-12 pl-lg-5 pl-md-3 pl-sm-2 pl-2">
+                <div class="col-lg-10 offset-md-1 col-12 pl-lg-5 pl-md-3 pl-sm-2 pl-2">
                     <div class="single-teacher-details shadow">
                         <div class="section-title section-title-left mb-4">
                             <h2>Admissions {{ date('Y') - 1 }}/{{ date('Y') }}</h2>
                         </div>
-                        <p>
-                            We are open up our admissions process for the {{ date('Y') - 1 }}/{{ date('Y') }} academic
-                            session {{ env('APP_NAME') }}.
-                            Kudos to all our prospective parents for choosing {{ env('APP_NAME') }}.
-                        </p>
-                        <p class="mt-2" >
-                            To apply to Waterspring International School you can <a href="javascripr:;">download</a> the admission form below or fill our online form.
-                        </p>
+                        <div class="" style="font-size: ">
+                            <p>
+                                Appication form can be obtained <a href="">here</a> or directly from the school
+                                administrative office which provides additional
+                                advantages of viewing the school first hand.
+                            </p>
+                            <br>
+                            <p>
+                                Children appliying to the toddler programme (15 months- 3 years ) must be 15 months old by
+                                september 30th to be eligible. it is excepted
+                                that after submitting an application, a visit will be scheduled for the parent in the
+                                company of the child or children. During the visit,
+                                there will be short interview with the head of school to get to know the family better and
+                                also have the opportunity to visit the school's
+                                montessori classroom with the child or children.
+
+                            </p>
+                            <br>
+                            <p>
+                                When applying to early childhood level (ages 2 1/2 - 5+ years)
+                                the child must be at least 2 1/2 years of age by september 30th to be eligible.
+                            </p>
+                            <br>
+                            <p>
+                                If applting to the primary level, the child must be at least 5 yeasr of age by september
+                                30th to be eligble for grade 1.
+                                it is expected that when an appication form is submitted, a vist will be scheduled to the
+                                school with the child. During the visit,
+                                there will be short interviews with the head of school and the child will have to sit for a
+                                written test - appropiate school readiness
+                                assessment, to help in establishing the child's previous knowlegde and ascertain his or her
+                                ability to fit into the class applied for
+                                progress schoo may be requested. admission and placement into class is based soley on
+                                perforance and age of the pupil.
+                            </p>
+                            <br>
+                            <p>
+                                Children are admitted mid-stream only if there are spaces in the class of interest
+                            </p>
+                            <br>
+                            <p>
+                                All Forms must be gilled and returned with 2 passport photographs a copy of the child's
+                                health and immunization record,
+                                birth certificate, and assesment record from previous school where necessary.
+                                THe admission process highlighted above applies to all classes in our secondary school
+                            </p>
+                        </div>
+                        {{--                        
                         <div class="row mt-4">
                             <div class="col">
                                 <form class="faq-contact-form contact-form">
@@ -109,10 +149,10 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
-           
+
 
             </div>
         </div>
