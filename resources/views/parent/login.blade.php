@@ -42,7 +42,7 @@
                             <div id="sign-up" class="auth-form tab-pane fade show active  form-validation">
                                 <form action="/guardian-login" method="post" >@csrf
                                     <div class="text-center mb-4">
-                                        <h3 class="text-center mb-2 text-black">Parent Login</h3>
+                                        <h3 class="text-center mb-2 text-black">Guardian Login</h3>
 
 
                                         @if (session('success'))

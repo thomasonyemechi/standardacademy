@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeeController;
+use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\StaffController;
@@ -43,3 +44,9 @@ Route::post('/permission-update', [StaffController::class, 'updatePermissionAll'
 
 
 Route::post('/guardian-login', [ParentController::class, 'guardianLogin']);
+
+
+
+Route::post('/promote_student', [MiscellaneousController::class, 'promoteStudent']);
+Route::post('/demote_student', [MiscellaneousController::class, 'demoteStudent']);
+

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use App\Models\Guardian;
+use App\Models\Payment;
+use App\Models\ResultSummary;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class ParentController extends Controller
+class ParentController extends StudentController    
 {
     function parentIndex()
     {
@@ -60,7 +64,7 @@ class ParentController extends Controller
 
         $guardian = Guardian::where(['guardian_email' => $request->email, 'guardian_phone' => $request->password])->first();
 
-        if(!$guardian) {
+        if (!$guardian) {
             return back()->with('error', 'Invalid login detials');
         }
 
@@ -80,8 +84,28 @@ class ParentController extends Controller
 
     function parentDashboardIndex()
     {
-
-        return view('parent.index');
+        $students = Student::with(['grade:id,class', 'arm'])->where(['parent_id' => $this->guardian()->id])->get();
+        return view('parent.index', compact(['students']));
     }
 
+    function viewStudentProfile($student)
+    {
+        $student = Student::with(['grade', 'arm'])->findorfail($student); $student_id = $student->id;
+        if ($this->guardian()->id != $student->parent_id) {
+            return redirect('/guardian/')->with('error', 'The page you are requesting for was not found');
+        }
+
+        
+        $term_id = $this->currentTerm()->id;
+        $student = Student::with(['parent', 'grade', 'arm'])->findorfail($student_id);
+        $payments = Payment::with(['fee_cat:id,fee', 'user:id,name'])->where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 5])->orderby('id', 'desc')->limit(25)->get();
+        $brought_forward = $this->calculateBalanceBroughtFwd($student_id, $term_id);
+        $fees = Payment::with(['fee_cat:id,fee',])->where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 1])->orderby('id', 'desc')->get();
+        $grade = $student->grade;
+        $result_id = ResultSummary::where(['student_id' => $student->id, 'term_id' => $term_id])->first()->id ?? 0;
+        $results = ResultSummary::where(['student_id' => $student->id])->get();
+        $assignments = Assignment::with(['subject:id,subject'])->where(['class_id' => $student->class_id, 'term_id' => $term_id])->orderby('updated_at', 'asc')->get();
+        return view('parent.student', compact(['student','grade', 'payments', 'brought_forward', 'fees', 'result_id', 'results', 'assignments']));
+    }
+    
 }

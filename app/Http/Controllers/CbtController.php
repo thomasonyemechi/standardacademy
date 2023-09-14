@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\ExamType;
 use App\Models\Question;
 use App\Models\Subject;
+use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,6 +22,30 @@ class CbtController extends Controller
             $question = Question::findorFail($request->edit);
         }
         return view('admin.exam_question', compact(['exam', 'questions', 'question']));
+    }
+
+    function questionBankIndex($term = 0, $class=0)
+    {
+        $subjects = Subject::orderby('subject', 'asc')->get();
+        $grades = ClassCore::orderby('index', 'asc')->get();
+        $terms = Term::with('session')->get();  
+        $exams = [];
+        if($term AND $class) {
+            $exams = Exam::with(['subject', 'grade'])->withCount('questions')->where(['term_id' => $term, 'class_id' => $class])->get();
+        }
+        return view('admin.question_bank', compact(['grades', 'terms', 'exams']) );
+    }
+
+    function viewExamBank(Request $request)
+    {
+        return redirect('/admin/question-bank/'.$request->term.'/'.$request->grade);
+    }
+
+    function viewBankQuestions($exam_id)
+    {
+        $exam = Exam::with(['subject', 'grade'])->findOrFail($exam_id);
+        $questions = Question::where(['exam_id' => $exam->id])->paginate(25);
+        return view('admin.bank-questions', compact(['exam', 'questions']) );
     }
 
     function examIndex()

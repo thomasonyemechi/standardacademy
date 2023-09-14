@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'guardian',
         ],
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
     ],
 
     /*
@@ -72,6 +76,11 @@ return [
         'guardian' => [
             'driver' => 'eloquent',
             'model' => App\Models\Guardian::class,
+        ],
+
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
         ]
 
         // 'users' => [

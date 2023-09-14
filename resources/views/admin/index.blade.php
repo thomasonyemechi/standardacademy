@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('page_title')
-    Upload Class Result
+    Admin Dashboard
 @endsection
 
 @section('page_content')
@@ -50,8 +50,8 @@
                                     <i class="la la-user text-white"></i>
                                 </div>
                                 <div class="chart-num">
-                                    <p>Subjects</p>
-                                    <h2 class="font-w700 mb-0">32k</h2>
+                                    <p>Classes</p>
+                                    <h2 class="font-w700 mb-0">{{ \App\Models\ClassCore::count() }}</h2>
                                 </div>
                             </div>
                         </div>

@@ -43,6 +43,7 @@
                         <li><a href="/admin/manage-class">Create Class</a></li>
                         <li><a href="/admin/class-arms">Arms / Category</a></li>
                         <li><a href="/admin/manage-subject">Create Subject</a></li>
+                        <li><a href="/admin/manage-promotion">Manage Promotions</a></li>
                     </ul>
                 </li>
 
@@ -103,6 +104,7 @@
                         <li><a href="/admin/broad-sheet">Class Broad Sheet</a></li>
                     @endif
                     <li><a href="#">Class Broad Sheet</a></li>
+                    <li><a href="#">Result Setup</a></li>
                 </ul>
             </li>
 
@@ -114,7 +116,7 @@
                 <ul aria-expanded="false">
                     @if ($role == 'administrator')
                         <li><a href="/admin/exam-types">Exam Types</a></li>
-                        <li><a href="#">Question Bank</a></li>
+                        <li><a href="/admin/question-bank">Question Bank</a></li>
                     @endif
 
                     @if ($user->grade)

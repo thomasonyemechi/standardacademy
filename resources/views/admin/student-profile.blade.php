@@ -209,11 +209,12 @@
                                                                     <th>Discount</th>
                                                                     <th>Total</th>
                                                                 </tr>
-                                                                <tr>
-                                                                    @php
-                                                                        $tot = 0;
-                                                                    @endphp
-                                                                    @foreach ($fees as $fe)
+
+                                                                @php
+                                                                    $tot = 0;
+                                                                @endphp
+                                                                @foreach ($fees as $fe)
+                                                                    <tr>
                                                                         @php
                                                                             $tot += $fe->total;
                                                                         @endphp
@@ -221,8 +222,9 @@
                                                                         <th>{{ money_format($fe->amount) }}</th>
                                                                         <th>{{ money_format($fe->discount) }}</th>
                                                                         <th>{{ money_format(abs($fe->total)) }}</th>
-                                                                    @endforeach
-                                                                </tr>
+                                                                    </tr>
+                                                                @endforeach
+
                                                                 @if ($brought_forward[0] > 0)
                                                                     <tr>
                                                                         <th colspan="3">Balance Brought Foward</th>
@@ -279,13 +281,14 @@
                                                                     @foreach ($assignments as $ass)
                                                                         <tr>
                                                                             <td><span
-                                                                                    class="text-primary font-w600">{{$ass->subject->subject}}
+                                                                                    class="text-primary font-w600">{{ $ass->subject->subject }}
                                                                                 </span>
                                                                             </td>
                                                                             <td style="white-space: initial;">
-                                                                                {!!$ass->assignment!!}
+                                                                                {!! $ass->assignment !!}
                                                                             </td>
-                                                                            <td>{{ date('j M, Y',strtotime($ass->updated_at)) }}</td>
+                                                                            <td>{{ date('j M, Y', strtotime($ass->updated_at)) }}
+                                                                            </td>
 
 
                                                                         </tr>
@@ -365,7 +368,7 @@
                                 </div>
                             </div> --}}
                         </div>
-                 
+
                     </div>
                 </div>
             </div>
