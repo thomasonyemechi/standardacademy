@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\ParentController;
@@ -50,3 +51,5 @@ Route::post('/guardian-login', [ParentController::class, 'guardianLogin']);
 Route::post('/promote_student', [MiscellaneousController::class, 'promoteStudent']);
 Route::post('/demote_student', [MiscellaneousController::class, 'demoteStudent']);
 
+
+Route::post('/end-exam', [ExamController::class, 'endExam']);

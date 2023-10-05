@@ -1,4 +1,4 @@
-@extends('layout.parent')
+@extends('layout.student')
 
 @section('page_title')
     Student Profile

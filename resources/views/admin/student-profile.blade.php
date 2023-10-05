@@ -58,8 +58,10 @@
                                     <div class="dropdown-menu dropdown-menu-end" style="">
                                         <a class="dropdown-item openProfileEditModal " href="javascript:;">Edit Profile
                                             Info</a>
-                                        <a class="dropdown-item openfeePaymentModal" href="javascript:void(0);">Make Fee
-                                            Payment</a>
+                                        @if (auth()->user()->role == 'administrator')
+                                            <a class="dropdown-item openfeePaymentModal" href="javascript:void(0);">Make Fee
+                                                Payment</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -361,12 +363,13 @@
                 <div class="col-xl-3">
                     <div class="row">
                         <div class="col-xl-12">
-                            {{-- <div class="card h-auto">
+                            <div class="card h-auto">
                                 <div class="card-body">
-                                    <h3 class="heading">Schedule Details</h3>
-                                    <p class="mb-0">Thursday, 10th April , 2022</p>
+                                    <h3 class="heading">Portal Details</h3>
+                                    <p class="mb-0"> <b>Username:</b> {{$student->username}}  </p>
+                                    <p class="mb-0"> <b>password:</b> {{$student->pwd}}  </p>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
 
                     </div>

@@ -75,6 +75,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Topic</label>
+                                                <input type="hidden" name="class_id"  value="{{ $note->class_id }}" >
                                                 <input type="text" name="topic" placeholder="Enter Topic"
                                                     class="form-control" value="{{ old('topic') ?? session('topic') }}">
                                                 <input type="hidden" name="note_id" value="{{ $note->id }}">

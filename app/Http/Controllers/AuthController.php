@@ -18,6 +18,9 @@ class AuthController extends Controller
         ])->validate();
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
+            if (auth()->user()->role == 'teacher') {
+                return redirect('/admin/staff/' . auth()->user()->id);
+            }
             return redirect('/admin/dashboard')->with('success', 'Welcome Back');
         }
 

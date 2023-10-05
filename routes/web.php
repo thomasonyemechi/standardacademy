@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CbtController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\NoteController;
@@ -73,11 +74,13 @@ Route::group([], function () {
     Route::post('/staff_login', [AuthController::class, 'staffLogin']);
 
     Route::group(['prefix' => 'admin/', 'as' => 'admin.', 'middleware' => ['auth']], function () {
-        Route::get('/dashboard', [WebviewController::class, 'adminDashboard']);
 
 
         /////admin accessible
         Route::group(['middleware' => ['admin']], function () {
+
+            Route::get('/dashboard', [WebviewController::class, 'adminDashboard']);
+
 
             Route::get('/term-setup', [SessionController::class, 'termIndex']);
             Route::post('/create-session', [SessionController::class, 'createSession']);
@@ -95,8 +98,23 @@ Route::group([], function () {
             Route::post('/create-class', [ClassController::class, 'createClass']);
             Route::post('/order-class', [ClassController::class, 'orderClass']);
             Route::post('/assign-teacher', [ClassController::class, 'assignClassTeacher']);
+
+
+            Route::get('/guardian-record', [ParentController::class, 'parentIndex']);
+            Route::post('/add-guardian', [ParentController::class, 'createGuardianProfile']);
+    
+
+            Route::get('/add-student', [StudentController::class, 'addStudentIndex']);
+            Route::get('/students', [StudentController::class, 'allStudent']);
+      
+    
         });
 
+
+        Route::get('/student/{student_id}', [StudentController::class, 'studentProfileIndex']);
+        Route::post('/create-student-profile', [StudentController::class, 'createStudentProfile']);
+        Route::post('/update-student-class', [StudentController::class, 'updateStudentClass']);
+        Route::post('/update-student-profile', [StudentController::class, 'updateStudentProfile']);
 
 
         Route::get('/class-profile/{class_id}', [ClassController::class, 'classProfileIndex']);
@@ -105,15 +123,7 @@ Route::group([], function () {
         Route::post('/create-subject', [SubjectController::class, 'createSubject']);
         Route::post('/update-subject', [SubjectController::class, 'updateSubject']);
 
-        Route::get('/guardian-record', [ParentController::class, 'parentIndex']);
-        Route::post('/add-guardian', [ParentController::class, 'createGuardianProfile']);
-
-        Route::get('/add-student', [StudentController::class, 'addStudentIndex']);
-        Route::get('/students', [StudentController::class, 'allStudent']);
-        Route::get('/student/{student_id}', [StudentController::class, 'studentProfileIndex']);
-        Route::post('/create-student-profile', [StudentController::class, 'createStudentProfile']);
-        Route::post('/update-student-class', [StudentController::class, 'updateStudentClass']);
-        Route::post('/update-student-profile', [StudentController::class, 'updateStudentProfile']);
+   
 
         Route::get('/add-staff', [StaffController::class, 'addStaffIndex']);
         Route::post('/create-staff-profile', [StaffController::class, 'createStaffProfile']);
@@ -160,6 +170,11 @@ Route::group([], function () {
         Route::get('/question-bank/{term?}/{class?}', [CbtController::class, 'questionBankIndex']);
         Route::post('/view-exam-bank', [CbtController::class, 'viewExamBank']);
         Route::get('/bank-question/{exam_id}', [CbtController::class, 'viewBankQuestions']);
+        //start exams/test
+        Route::get('/start-exam', [ExamController::class, 'startExamIndex']);
+        Route::post('/start-exam', [ExamController::class, 'startTest']);
+        Route::get('/activate-test/{test_id}', [ExamController::class, 'activateTest']);
+
 
         ////prospectvie exams group route
         Route::group(['prefix' => 'prospective/', 'as' => 'prospective.', 'middleware' => []], function () {
@@ -193,12 +208,18 @@ Route::group([], function () {
     Route::post('/student-login', [StudentDashboardController::class, 'loginStudent']);
     Route::get('/student_logout',  function () {
         Auth::guard('student')->logout();
-        return redirect('student.login')->with('success', 'You have been logged out');
+        return redirect('student/login')->with('success', 'You have been logged out');
     });
     Route::group(['prefix' => 'student/', 'as' => 'student.', 'middleware' => ['auth:student']], function () {
         Route::get('/', [StudentDashboardController::class, 'dash']);
-        Route::get('/profile', [StudentDashboardController::class, 'profileRet']);
+        Route::get('/my-profile', [StudentDashboardController::class, 'profileRet']);
+        Route::get('/exam', [StudentDashboardController::class, 'startIndex']);
+        Route::get('/question/{result_summary_id}', [StudentDashboardController::class, 'answerIndex']);
+        Route::get('/proceed-toexam/{test_id}', [ExamController::class, 'proceedToTest']);
 
+
+        Route::post('/save-answer', [ExamController::class, 'saveAnswer']);
+        Route::get('/notes', [StudentDashboardController::class, 'readNoteIndex']);
 
     });
 

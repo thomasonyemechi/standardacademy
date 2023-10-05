@@ -179,11 +179,12 @@
 
                                     @foreach ($assignments as $ass)
                                         <tr>
-                                            <td><h5>{{$ass->subject->subject}}</h5></td>
+                                            <td>
+                                                <h5>{{ $ass->subject->subject }}</h5>
+                                            </td>
                                             <td>
                                                 <div class="d-flex justify-content-end text-bold ">
-                                                    <a href="#" target="_blank"
-                                                        title="View Note Content"
+                                                    <a href="#" target="_blank" title="View Note Content"
                                                         class="btn me-2 btn-primary btn-sm py-1 px-2">
                                                         <i class="la la-eye"></i>
                                                     </a>
@@ -226,14 +227,16 @@
                             </h4>
                         @endif
                     </div>
-                    <div class="d-flex justify-content-between mt-2 ">
-                        <a class="btn btn-primary btn-sm py-1 openassignTeacherModal" href="javascript:; "> Assign New
-                            Teacher</a>
-                        @if ($grade->teacher)
-                            <a class="btn btn-info btm-sm py-1" href="/admin/staff/{{ $grade->teacher->id }}"> Teacher
-                                Profile</a>
-                        @endif
-                    </div>
+                    @if (auth()->user()->role == 'administrator')
+                        <div class="d-flex justify-content-between mt-2 ">
+                            <a class="btn btn-primary btn-sm py-1 openassignTeacherModal" href="javascript:; "> Assign New
+                                Teacher</a>
+                            @if ($grade->teacher)
+                                <a class="btn btn-info btm-sm py-1" href="/admin/staff/{{ $grade->teacher->id }}"> Teacher
+                                    Profile</a>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

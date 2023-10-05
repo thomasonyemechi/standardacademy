@@ -50,11 +50,17 @@
                                  <li class="dropdown"><a class="nav-link" href="javascript:;">Media & Resources</a>
                                     <ul class="dropdown-menu">
                                        <li><a href="/gallery">Gallery </a></li>
-                                       <li><a href="#">Parent Login </a></li>
+                                       <li><a href="/guardian/login">Parent Login </a></li>
                                     </ul>    
                                  </li>
                                 <li><a class="nav-link" href="/news">News</a>  </li>
                                 <li><a href="/contact" class="nav-link">Contact</a></li>
+                                <li class="dropdown"><a class="nav-link" href="javascript:;">Login</a>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="/login">Staff Login </a></li>
+                                       <li><a href="/student/login">Student Portal </a></li>
+                                    </ul>    
+                                 </li>
                             </ul>
                         </nav>
                     </div>

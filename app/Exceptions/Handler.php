@@ -24,7 +24,15 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            return response()->view('errors.500', [], 500);
         });
+
+
+        $this->reportable(function (Throwable $e) {
+            return response()->view('errors.404', [], 404);
+        });
+
+
     }
+
 }

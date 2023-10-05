@@ -58,10 +58,10 @@
 </head>
 
 <body id="main">
-    <div id="page-preloader">
+    {{-- <div id="page-preloader">
         <div class="loader"></div>
         <div class="loa-shadow"></div>
-    </div>
+    </div> --}}
 
     @include('layout.inc.web_header')
 

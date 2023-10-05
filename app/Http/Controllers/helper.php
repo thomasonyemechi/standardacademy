@@ -18,3 +18,13 @@ function money_format($num)
 {
     return '$ '.number_format($num);
 }
+
+
+function check_ans($myans, $opt)
+{
+    $val = '';
+    if ($myans == $opt) {
+        $val = 'checked';
+    }
+    return $val;
+}

@@ -1,14 +1,15 @@
 <div class="dlabnav">
     <div class="dlabnav-scroll">
         <ul class="metismenu" id="menu">
-            <li><a class="" href="/admin/dashboard" aria-expanded="false">
-                    <i class="material-symbols-outlined">home</i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
 
-            </li>
 
             @if ($role == 'administrator')
+                <li><a class="" href="/admin/dashboard" aria-expanded="false">
+                        <i class="material-symbols-outlined">home</i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+
+                </li>
                 <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                         <i class="material-symbols-outlined">school</i>
                         <span class="nav-text">Student</span>
@@ -49,7 +50,7 @@
 
 
                 <li>
-                    <a class="has-arrow" href="javascript:void(0);"  aria-expanded="false">
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
                         <i class="material-symbols-outlined">payments</i>
                         <span class="nav-text">Manage Fees</span>
                     </a>
@@ -70,6 +71,19 @@
                 </li>
             @endif
 
+            <li><a class="" href="/admin/staff/{{ $user->id }} " aria-expanded="false">
+                    <i class="material-symbols-outlined">person</i>
+                    <span class="nav-text">My Profile</span>
+                </a>
+            </li>
+
+            @if ($user->grade)
+                <li><a class="" href="/admin/class-profile/{{ $user->grade->id }} " aria-expanded="false">
+                        <i class="material-symbols-outlined">subject</i>
+                        <span class="nav-text"> {{ $user->grade->class }} Profile</span>
+                    </a>
+                </li>
+            @endif
 
             <li>
                 <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -93,6 +107,7 @@
                 </ul>
             </li>
 
+
             <li>
                 <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                     <i class="material-icons">grade</i>
@@ -103,8 +118,10 @@
                         <li><a href="/admin/upload-result">Upload Result </a></li>
                         <li><a href="/admin/broad-sheet">Class Broad Sheet</a></li>
                     @endif
-                    <li><a href="#">Class Broad Sheet</a></li>
-                    <li><a href="#">Result Setup</a></li>
+                    @if ($role == 'administrator')
+                        <li><a href="#">Class Broad Sheet</a></li>
+                        <li><a href="#">Result Setup</a></li>
+                    @endif
                 </ul>
             </li>
 
@@ -117,10 +134,12 @@
                     @if ($role == 'administrator')
                         <li><a href="/admin/exam-types">Exam Types</a></li>
                         <li><a href="/admin/question-bank">Question Bank</a></li>
+                        <li><a href="#">Initiated Test</a></li>
                     @endif
 
                     @if ($user->grade)
                         <li><a href="/admin/class-exams">Class Exams</a></li>
+                        <li><a href="/admin/start-exam">Start Test</a></li>
                     @endif
                 </ul>
             </li>
@@ -130,6 +149,13 @@
                     <a class="" href="/admin/prospective/create-exam" aria-expanded="false">
                         <i class="material-icons">login</i>
                         <span class="nav-text">Entrance Exams</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="" href="#" aria-expanded="false">
+                        <i class="material-icons">image</i>
+                        <span class="nav-text">Gallery</span>
                     </a>
                 </li>
             @endif

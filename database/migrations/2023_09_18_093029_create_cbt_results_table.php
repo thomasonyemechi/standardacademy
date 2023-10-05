@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('note_contents', function (Blueprint $table) {
+        Schema::create('cbt_results', function (Blueprint $table) {
             $table->id();
-            $table->integer('note_id');
-            $table->integer('class_id');
-            $table->integer('week');
-            $table->string('topic');
-            $table->text('content');
-            $table->integer('created_by');
+            $table->integer('question_id');
+            $table->integer('result_summary_id');
+            $table->string('my_option');
+            $table->integer('score');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('note_contents');
+        Schema::dropIfExists('cbt_results');
     }
 };

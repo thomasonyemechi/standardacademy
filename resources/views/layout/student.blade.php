@@ -119,7 +119,7 @@
 
                                             </div>
                                             <div class="card-body p-3">
-                                                <a href="#" class="dropdown-item ai-icon ">
+                                                <a href="/student/my-profile" class="dropdown-item ai-icon ">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
                                                         height="24px" viewBox="0 0 24 24" version="1.1"
@@ -140,7 +140,7 @@
 
                                             </div>
                                             <div class="card-footer text-center p-3">
-                                                <a href="/parent_logout"
+                                                <a href="/student_logout"
                                                     class="dropdown-item ai-icon btn btn-primary light">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                                         height="18" viewBox="0 0 24 24" fill="none"
@@ -171,14 +171,14 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="" href="#" aria-expanded="false">
+                    {{-- <li><a class="" href="/student/" aria-expanded="false">
                             <i class="material-symbols-outlined">home</i>
                             <span class="nav-text">Dashboard</span>
                         </a>
-                    </li>
+                    </li> --}}
 
 
-                    <li><a class="" href="#" aria-expanded="false">
+                    <li><a class="" href="/student/my-profile" aria-expanded="false">
                             <i class="material-symbols-outlined">person</i>
                             <span class="nav-text">Profile</span>
                         </a>
@@ -186,7 +186,7 @@
 
 
 
-                    <li><a class="" href="#" aria-expanded="false">
+                    <li><a class="" href="/student/notes" aria-expanded="false">
                             <i class="material-symbols-outlined">subject</i>
                             <span class="nav-text">Read Notes</span>
                         </a>
@@ -200,7 +200,7 @@
                             <span class="nav-text">School Exam</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Take Exam</a></li>
+                            <li><a href="/student/exam">Take Exam</a></li>
                             <li><a href="#">Exam Results</a></li>
                         </ul>
                     </li>

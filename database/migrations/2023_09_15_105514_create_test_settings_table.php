@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('note_contents', function (Blueprint $table) {
+        Schema::create('test_settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('note_id');
+            $table->integer('exam_id');
             $table->integer('class_id');
-            $table->integer('week');
-            $table->string('topic');
-            $table->text('content');
-            $table->integer('created_by');
+            $table->integer('term_id');
+            $table->integer('questions');
+            $table->integer('time');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('note_contents');
+        Schema::dropIfExists('test_settings');
     }
 };

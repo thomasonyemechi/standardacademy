@@ -62,10 +62,10 @@ class NoteController extends Controller
 
     function createNoteIndex()
     {
-        $classes = ClassCore::where('class_teacher', auth()->user()->id)->get();
-        $notes = Note::withCount(['contents'])->where(['created_by' => auth()->user()->id, 'term_id' => $this->currentTerm()->id ])->orderby('id', 'desc')->paginate(25);
+        $class = ClassCore::where('class_teacher', auth()->user()->id)->first();
+        $notes = Note::withCount(['contents'])->where(['class_id' => $class->id, 'term_id' => $this->currentTerm()->id ])->orderby('id', 'desc')->paginate(25);
         $subjects = Subject::orderby('subject', 'asc')->get();
-        return view('admin.create_note', compact(['notes', 'classes', 'subjects']));
+        return view('admin.create_note', compact(['notes', 'class', 'subjects']));
     }
 
     function deleteNote($note_id)
@@ -121,6 +121,7 @@ class NoteController extends Controller
         NoteContent::create([
             'note_id' => $request->note_id,
             'topic' => $request->topic,
+            'class_id' => $request->class_id,
             'content' => $request->content,
             'week' => $request->week,
             'created_by' => auth()->user()->id

@@ -128,7 +128,7 @@
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Make Fee Payment </h5>
+                    <h5 class="modal-title">Create Note </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -136,10 +136,8 @@
                         <div class="col-md-6 form-group">
                             <label>Grade</label>
                             <select name="class_id" class="form-control">
-                                <option disabled selected>Select grade</option>
-                                @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->class }}</option>
-                                @endforeach
+                                <option value="{{ $class->id }}" selected>{{ $class->class }}</option>
+                         
                             </select>
                         </div>
 
@@ -153,7 +151,7 @@
                             </select>
                         </div>
                         <div class="col-12 mt-2 d-flex justify-content-end form-group">
-                            <button type="submit" class="btn btn-secondary float-right make_pay">Make Payment</button>
+                            <button type="submit" class="btn btn-secondary float-right make_pay">Create Note</button>
                         </div>
                     </form>
 
