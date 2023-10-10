@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="DexignLab">
+    <meta name="author" content="Bitech">
     <meta name="keywords"
         content="school, Standard Academy, education, academy, Akure, Best, Primary school, Best primary school, primary">
     <meta name="viewport" content="width=device-width, initial-scale=1">
