@@ -9,6 +9,9 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use DateTime;
+
+
 class FeeController extends Controller
 {
 
@@ -20,7 +23,7 @@ class FeeController extends Controller
     }
 
 
-    
+
 
 
 
@@ -36,7 +39,7 @@ class FeeController extends Controller
         Payment::create([
             'term_id' => $this->currentTerm()->id,
             'fee_id' => $request->fee_cat_id ?? 0,
-            'fee_index' => 0 ,
+            'fee_index' => 0,
             'class_id' => $student->class_id,
             'student_id' => $student->id,
             'total' => $request->amount,
@@ -60,7 +63,7 @@ class FeeController extends Controller
             'fee_id' => 'required|exists:fee_categories,id',
         ])->validate();
 
-        return redirect('/admin/manage-levy/'.$request->fee_id.'/'.$request->class_id);
+        return redirect('/admin/manage-levy/' . $request->fee_id . '/' . $request->class_id);
     }
 
 
@@ -72,19 +75,20 @@ class FeeController extends Controller
             'discount' => 'integer',
         ]);
 
-        if ($val->fails()){ return response(['errors'=>$val->errors()->all()], 422);}
+        if ($val->fails()) {
+            return response(['errors' => $val->errors()->all()], 422);
+        }
         $payment = Payment::find($request->payment_id);
         $payment->update([
             'amount' => $request->amount,
             'discount' => $request->discount,
-            'total' => -$request->amount-$request->discount
+            'total' => -$request->amount - $request->discount
         ]);
 
         return response([
             'message' => 'Fee updated sucessfully',
             'status' => true
         ], 200);
-
     }
 
 
@@ -96,8 +100,7 @@ class FeeController extends Controller
 
         $data = [];
 
-        foreach($request->payments as $pay)
-        {
+        foreach ($request->payments as $pay) {
             $payment = Payment::find($pay['id']);
             $dis = $pay['discount'];
             $payment->update([
@@ -178,7 +181,8 @@ class FeeController extends Controller
     }
 
 
-    function fetSettedFee($fee, $class){
+    function fetSettedFee($fee, $class)
+    {
         $term = $this->currentTerm()->id;
         $data = [
             'session' =>  $this->currentTerm()->session->session,
@@ -186,12 +190,12 @@ class FeeController extends Controller
             'fee' => FeeCategory::find($fee)->fee,
             'class' => ClassCore::find($class)->class,
             'records' => Payment::with(['student:id,surname,firstname'])
-            ->where(['class_id' => $class , 'fee_id' => $fee , 'term_id' => $term, 'type' => 1])->get([
-                'id', 'fee_id', 'class_id', 'student_id', 'amount', 'discount'
-            ])
+                ->where(['class_id' => $class, 'fee_id' => $fee, 'term_id' => $term, 'type' => 1])->get([
+                    'id', 'fee_id', 'class_id', 'student_id', 'amount', 'discount'
+                ])
         ];
 
-        
+
 
         return response([
             'data' => $data
@@ -228,4 +232,55 @@ class FeeController extends Controller
 
         return back()->with(['success' => 'Fee category has been created', 'action' => 'created_fee']);
     }
+
+
+    function fetchDailyFeeTransaction(Request $request)
+    {
+
+        $day = ($request->date) ? date('Y-m-d', strtotime($request->date)) : date('Y-m-d');
+
+        $payments = Payment::with(['fee_cat:id,fee', 'student:id,surname,firstname', 'grade:id,class', 'term:id,term', 'user:id,name'])
+            ->where('created_at', 'like', "%$day%")->orderBy('id', 'desc')->paginate(100);
+        return view('admin.daily_payments', compact(['payments', 'day']));
+    }
+
+
+
+    function getStartAndEndDate($week, $year)
+    {
+        $dto = new DateTime();
+        $dto->setISODate($year, $week);
+        $ret['week_start'] = $dto->format('Y-m-d');
+        $dto->modify('+6 days');
+        $ret['week_end'] = $dto->format('Y-m-d');
+        return $ret;
+    }
+
+
+
+    function fetchWeeklyTransaction(Request $request)
+    {
+        $week = $request->week ?? date('W') ;
+        $week_array = $this->getStartAndEndDate($week, date('Y'));
+        $start = strtotime($week_array['week_start']);
+        $end = strtotime($week_array['week_end']) + (86400 - 1);
+        $payments = Payment::with(['fee_cat:id,fee', 'student:id,surname,firstname', 'grade:id,class', 'term:id,term', 'user:id,name'])
+            ->whereBetween('created_at', [date('Y-m-d', $start), date('Y-m-d',$end)])->orderBy('id', 'desc')->paginate(200);
+        $date = date('j M, Y', $start) . ' to ' . date('j M, Y', $end) . ' (Week ' . $week . ')';
+        return view('admin.weekly_payment', compact(['payments', 'date']));
+    }
+
+
+    function fetchDateRangeFee(Request $request){
+        $from = $request->from;
+        $to = $request->to;
+        $start = strtotime($from);
+        $end = strtotime($to)+(86400-1);
+        $payments = Payment::with(['fee_cat:id,fee', 'student:id,surname,firstname', 'grade:id,class', 'term:id,term', 'user:id,name'])
+        ->whereBetween('created_at', [date('Y-m-d', $start), date('Y-m-d', $end)])->orderBy('id', 'desc')->paginate(200);
+        $date =  date('j M, Y', $start).' to '. date('j M, Y', $end).'';
+        return view('admin.range_fee', compact(['payments', 'date']));
+    }
+
+
 }

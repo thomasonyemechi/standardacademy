@@ -11,7 +11,7 @@
                     <div class="page-title flex-wrap">
                         <form action="">
                             <div class="input-group search-area mb-md-0 mb-3">
-                                <input type="text" name="" class="form-control" placeholder="Search student here...">
+                                <input type="text" name="student" class="form-control" placeholder="Search student here...">
                                 <span class="input-group-text"><a href="javascript:void(0)">
                                         <svg width="15" height="15" viewBox="0 0 18 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">

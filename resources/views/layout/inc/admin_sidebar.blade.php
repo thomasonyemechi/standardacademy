@@ -56,10 +56,10 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="/admin/manage-levy">Set School Fees</a></li>
-                        <li><a href="#">All Fee Payments</a></li>
-                        <li><a href="#">Daily Payments</a></li>
-                        <li><a href="#">Weekly Payments</a></li>
-                        <li><a href="#">Date-range</a></li>
+                        {{-- <li><a href="#">All Fee Payments</a></li> --}}
+                        <li><a href="/admin/transaction/daily">Daily Payments</a></li>
+                        <li><a href="/admin/transaction/weekly">Weekly Payments</a></li>
+                        <li><a href="/admin/transaction/range">Date-range</a></li>
                     </ul>
                 </li>
 

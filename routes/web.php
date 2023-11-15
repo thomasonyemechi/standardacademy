@@ -106,6 +106,15 @@ Route::group([], function () {
 
             Route::get('/add-student', [StudentController::class, 'addStudentIndex']);
             Route::get('/students', [StudentController::class, 'allStudent']);
+
+
+
+
+            Route::get('/transaction/daily', [FeeController::class, 'fetchDailyFeeTransaction']);
+            Route::get('/transaction/weekly', [FeeController::class, 'fetchWeeklyTransaction']);
+            Route::get('/transaction/termly/{term?}', [FeeController::class, 'fetchTermlyTransaction']);
+            Route::get('/transaction/range', [FeeController::class, 'fetchDateRangeFee']);
+        
       
     
         });

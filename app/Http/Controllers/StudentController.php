@@ -27,7 +27,7 @@ class StudentController extends Controller
         $brought_forward = $this->calculateBalanceBroughtFwd($student_id, $term_id);
         $fees = Payment::with(['fee_cat:id,fee',])->where(['student_id' => $student_id, 'term_id' => $term_id, 'type' => 1])->orderby('id', 'desc')->get();
 
-        $result_id = ResultSummary::where(['student_id' => $student->id, 'term_id' => $term_id ])->first()->id ?? 0;
+        $result_id = ResultSummary::where(['student_id' => $student->id, 'term_id' => $term_id])->first()->id ?? 0;
         $results = ResultSummary::where(['student_id' => $student->id])->get();
         $assignments = Assignment::with(['subject:id,subject'])->where(['class_id' => $student->class_id, 'term_id' => $term_id])->orderby('updated_at', 'asc')->get();
         return view('admin.student-profile', compact(['student', 'classes', 'arms', 'parents', 'payments', 'brought_forward', 'fees', 'result_id', 'results', 'assignments']));
@@ -53,9 +53,16 @@ class StudentController extends Controller
 
 
 
-    function allStudent()
+    function allStudent(Request $request)
     {
-        $students = Student::with(['parent:id,guardian_name,state', 'grade:id,class', 'arm:id,arm'])->orderBy('id', 'desc')->paginate(25);
+        if ($request->student) {
+            $students = Student::with(['parent:id,guardian_name,state', 'grade:id,class', 'arm:id,arm'])
+            ->where('surname', 'like', "%$request->student%")
+            ->orwhere('firstname', 'like', "%$request->student%")
+            ->orwhere('othername', 'like', "%$request->student%")->paginate(25);
+        }else {
+            $students = Student::with(['parent:id,guardian_name,state', 'grade:id,class', 'arm:id,arm'])->orderBy('id', 'desc')->paginate(25);
+        }
         return view('admin.students', compact('students'));
     }
     function addStudentIndex()
