@@ -119,8 +119,9 @@
                         <li><a href="/admin/broad-sheet">Class Broad Sheet</a></li>
                     @endif
                     @if ($role == 'administrator')
-                        <li><a href="#">Class Broad Sheet</a></li>
-                        <li><a href="#">Result Setup</a></li>
+                        <li><a href="/admin/broad-sheet">Class Broad Sheet</a></li>
+                        <li><a href="/admin/upload-result">Upload Result </a></li>
+                        {{-- <li><a href="#">Result Setup</a></li> --}}
                     @endif
                 </ul>
             </li>

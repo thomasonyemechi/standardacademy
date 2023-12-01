@@ -80,7 +80,13 @@
                         <div class="col-md-6 form-group">
                             <label>Grade</label>
                             <select name="class_id" class="form-control" id="">
-                                <option value="{{ $class->id }}">{{ $class->class }}</option>
+                                @if (auth()->user()->role == 'administrator')
+                                    @foreach ($classes as $class)
+                                        <option value="{{ $class->id }}">{{ $class->class }}</option>
+                                    @endforeach
+                                @else
+                                    <option value="{{ $class->id }}">{{ $class->class }}</option>
+                                @endif
                             </select>
                         </div>
 
@@ -163,8 +169,8 @@
                         total = first.total + second.total + third.total;
                         divisor = ((first.total > 0) ? 1 : 0) + ((second.total > 0) ? 1 : 0) + ((
                             third.total > 0) ? 1 : 0);
-                        ef = parseInt(total) / parseInt(divisor);  
-                        if(isNaN(ef)) {
+                        ef = parseInt(total) / parseInt(divisor);
+                        if (isNaN(ef)) {
                             ef = 0;
                         }
                         body.append(`

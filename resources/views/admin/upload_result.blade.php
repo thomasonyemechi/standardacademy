@@ -15,7 +15,7 @@
                     <h4 class="haeding mb-0 fee_list_card "> <i class="fa fa-list-alt" aria-hidden="true"></i> <span
                             class="t_text">Class Result</span>
                     </h4>
-                <button class="btn btn-danger btn-sm openStartResultModal ">Start Result</button>
+                    <button class="btn btn-danger btn-sm openStartResultModal ">Start Result</button>
 
                 </div>
                 <div class="card-body p-0">
@@ -61,7 +61,13 @@
                         <div class="col-md-6 form-group">
                             <label>Grade</label>
                             <select name="class_id" class="form-control" id="">
-                                <option value="{{ $class->id }}">{{ $class->class }}</option>
+                                @if (auth()->user()->role == 'administrator')
+                                    @foreach ($classes as $class)
+                                        <option value="{{ $class->id }}">{{ $class->class }}</option>
+                                    @endforeach
+                                @else
+                                    <option value="{{ $class->id }}">{{ $class->class }}</option>
+                                @endif
                             </select>
                         </div>
 

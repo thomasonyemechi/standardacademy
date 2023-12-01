@@ -61,7 +61,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                 <div class="widget-stat card bg-warning">
                     <div class="card-body p-3">
                         <div class="media">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                 <div class="widget-stat card bg-success">
                     <div class="card-body p-3">
                         <div class="media">
@@ -91,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-12">
                 <div class="widget-stat card bg-danger">
                     <div class="card-body p-3">
                         <div class="media">
@@ -107,21 +107,7 @@
                 </div>
             </div>
 
-            <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-                <div class="widget-stat card bg-primary">
-                    <div class="card-body p-3">
-                        <div class="media">
-                            <span class="me-3">
-                                <i class="flaticon-381-heart"></i>
-                            </span>
-                            <div class="media-body text-white text-end">
-                                <p class="mb-1 text-white">Total Patient</p>
-                                <h3 class="text-white">783K</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+     
 
         </div>
 
@@ -205,11 +191,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
 
     </div>
 @endsection

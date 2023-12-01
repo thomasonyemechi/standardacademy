@@ -18,26 +18,28 @@ class ResultController extends Controller
     function uploadResultIndex($class_id=0, $subject_id=0)
     {
         $class = ClassCore::where('class_teacher', auth()->user()->id)->first();
+        $classes = ClassCore::get();
         $subjects = Subject::orderby('subject', 'asc')->get();
         if ($class_id > 0) {
             $subject = Subject::findorfail($subject_id);
             $grade = ClassCore::findOrFail($class_id);
         }
 
-        return view('admin.upload_result', compact(['class', 'subjects', 'class_id', 'subject_id']));
+        return view('admin.upload_result', compact(['class', 'subjects', 'class_id', 'subject_id', 'classes']));
     }
     
 
     function broadSheetIndex($class_id=0, $subject_id=0)
     {
         $class = ClassCore::where('class_teacher', auth()->user()->id)->first();
+        $classes = ClassCore::get();
         $subjects = Subject::orderby('subject', 'asc')->get();
         if ($class_id > 0) {
             $subject = Subject::findorfail($subject_id);
             $grade = ClassCore::findOrFail($class_id);
         }
 
-        return view('admin.result_broadsheet', compact(['class', 'subjects', 'class_id', 'subject_id']));
+        return view('admin.result_broadsheet', compact(['class', 'subjects', 'class_id', 'subject_id', 'classes']));
     }
 
     function classResultIndex($class_id=0)
