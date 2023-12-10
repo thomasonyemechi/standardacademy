@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('restock_summaries', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('phone');
-            $table->string('email')->nullable();
-            $table->string('address')->nullable();
+            $table->integer('supplier_id');
+            $table->string('total');
+            $table->string('amount_paid');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('restock_summaries');
     }
 };

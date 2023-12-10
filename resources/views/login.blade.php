@@ -23,16 +23,30 @@
                             </h1>
                         </div>
 
-                        <form method="POST">
+
+                        @if (session('success'))
+                            <div class="alert alert-success refresh">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger refresh">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+
+
+                        <form method="POST" action="/login"> @csrf
                             <!-- Username -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Username or email</label>
                                 <input type="email" id="email" class="form-control" name="email"
                                     placeholder="Email address here" required>
 
-                                    @error('email')
-                                        <i class="text-danger" > {{$message}} </i>
-                                    @enderror
+                                @error('email')
+                                    <i class="text-danger"> {{ $message }} </i>
+                                @enderror
                             </div>
                             <!-- Password -->
                             <div class="mb-3">
@@ -44,7 +58,7 @@
 
                             <div class="d-lg-flex justify-content-between align-items-center mb-4">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="rememberme">
+                                    <input type="checkbox" name="remeber" value="1" class="form-check-input" id="rememberme">
                                     <label class="form-check-label " for="rememberme">Remember me</label>
                                 </div>
                                 <div>
@@ -71,6 +85,9 @@
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/theme.min.js"></script>
+    <script>
+  
+    </script>
 </body>
 
 
