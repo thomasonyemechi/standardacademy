@@ -41,7 +41,7 @@
                                             {{ $student->surname . ' ' . $student->firstname . ' ' . $student->othername }}
                                         </h2>
                                         <p class="text-primary font-w600 fs-4"> {{ $student->grade->class }}
-                                            <sup>{{ $student->arm->arm }}</sup>
+                                            <sup>{{ $student->arm->arm ?? '' }}</sup>
                                             <a class="fs-2 toggleClassModal  "> <i class="la la-edit"> </i> </a>
                                         </p>
                                     </div>

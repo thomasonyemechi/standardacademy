@@ -202,6 +202,8 @@ Route::group([], function () {
         Route::get('/class-result/{class_id?}', [ResultController::class, 'classResultIndex']);
         Route::post('/update-result-remark', [ResultController::class, 'updateComment']);
 
+        Route::get('/result/print/s/{id}', [ResultController::class, 'printStudentIndex']);
+
         Route::get('/create-post', [BlogController::class, 'blogIndex']);
         Route::post('/create-post', [BlogController::class, 'createPost']);
         Route::post('/update-post', [BlogController::class, 'updatePost']);

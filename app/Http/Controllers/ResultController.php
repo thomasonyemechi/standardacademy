@@ -219,5 +219,9 @@ class ResultController extends Controller
     }
 
 
+    function printStudentIndex($result_id)
+    {
+        return view('admin.print_student_result', compact('result_id'));
+    }
 
 }
